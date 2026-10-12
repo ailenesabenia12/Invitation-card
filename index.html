@@ -1,114 +1,119 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lovemae - Canva to Link</title>
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lovemae Birthday</title>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif; background:#ffeef0;}
-#tap{position:fixed; inset:0; background:linear-gradient(135deg,#ff9a9e,#ff6b81); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:white;}
-.tapBtn{background:white; color:#ff2e63; padding:15px 35px; border-radius:30px; margin-top:15px; font-weight:700; animation:pop 1.5s infinite}
-@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.wrap{max-width:420px; margin:0 auto; padding:15px;}
-.card{width:100%; aspect-ratio:9/16; background:#fff; border-radius:20px; overflow:hidden; position:relative; box-shadow:0 20px 50px rgba(0,0,0,0.3); background-size:cover; background-position:center;}
-.card.shade{position:absolute; inset:0; background:linear-gradient(transparent 40%, rgba(0,0,0,0.15));}
-.text-layer{position:absolute; inset:0; padding:20px; display:flex; flex-direction:column; align-items:center; text-align:center;}
-h1{font-family:'Great Vibes'; font-size:42px; color:#d81b60; margin-top:40px; text-shadow:0 2px 10px white;}
-.owner-panel{background:white; border-radius:20px; padding:15px; margin-top:15px; box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-.owner-panel h3{font-size:14px; margin-bottom:8px;}
-.btn{display:block; width:100%; padding:12px; border-radius:12px; border:none; font-weight:700; cursor:pointer; margin:6px 0; font-size:13px; text-align:center; text-decoration:none;}
-.btn-canva{background:#00c4cc; color:white; font-size:16px;}
-.btn-upload{background:#ff6b81; color:white;}
-.btn-save{background:#222; color:white;}
-input{width:100%; padding:10px; border:1px dashed #ff6b81; border-radius:10px; margin:6px 0;}
-</style>
-</head>
-<body>
+body{background:#ffeef0;font-family:'Poppins',sans-serif}
+#tap{position:fixed;inset:0;background:linear-gradient(135deg,#ff9a9e,#ff6b81);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:white}
+.tapBtn{background:white;color:#ff2e63;padding:14px 32px;border-radius:30px;margin-top:12px;font-weight:700}
+.wrap{max-width:400px;margin:0 auto;padding:12px}
+.card{width:100%;aspect-ratio:9/16;background:white;border-radius:22px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.25)}
+.card.has-canva{background-size:100% 100%;background-position:center}
+.plain-bg{position:absolute;inset:0;background:linear-gradient(180deg,#fff,#ffe4e6)}
+.editable{cursor:pointer; border:1px dashed transparent; padding:2px 6px; border-radius:8px}
+.editable:hover{border-color:#ff6b81; background:rgba(255,107,129,0.1)}
+.editable:focus{outline:none; border-color:#ff1744; background:white; box-shadow:0 0 0 3px rgba(255,23,68,0.2)}
+#guest{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:#ff1744;color:white;padding:8px 20px;border-radius:20px;font-size:16px;z-index:20;box-shadow:0 4px 15px rgba(0,0,0,0.2); min-width:120px; text-align:center}
+.default-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding:70px 20px 20px}
+.owner{background:white;border-radius:16px;padding:12px;margin-top:12px}
+.btn{width:100%;padding:11px;border:none;border-radius:10px;font-weight:700;margin:5px 0;cursor:pointer;display:block;text-align:center;text-decoration:none;font-size:13px}
+.hint{font-size:9px;color:#ff6b81; margin-top:2px; animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+</style></head><body>
 
-<div id="tap" onclick="start()">
-  <div style="font-size:60px;">💌</div>
-  <div style="font-family:'Great Vibes'; font-size:50px;">Lovemae's Birthday</div>
-  <p>Tap to open + music 🎶</p>
-  <div class="tapBtn">👆 Tap Here to Open</div>
+<div id="tap" onclick="this.style.display='none'; document.getElementById('audio').play().catch(()=>{})">
+<div style="font-size:55px">💌</div>
+<div style="font-family:'Great Vibes';font-size:45px">Lovemae's Birthday</div>
+<p style="font-size:13px">Tap to open + music 🎶</p>
+<div class="tapBtn">👆 Tap to Open</div>
 </div>
 
 <div class="wrap">
-  <div class="card" id="card">
-    <div class="shade"></div>
-    <div class="text-layer">
-      <div style="background:white; padding:4px 12px; border-radius:20px; font-size:12px;">You're Invited! 🎉</div>
-      <div id="guest" style="background:#ff1744; color:white; padding:8px 18px; border-radius:20px; margin-top:15px; font-size:18px;">Hi, Kristine! ❤️</div>
-      <h1>Lovemae's<br>Birthday Party</h1>
-      <div style="font-size:55px; margin-top:10px;">🎂</div>
-      <div style="background:white; padding:8px 20px; border-radius:30px; margin-top:auto; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
-        <div style="background:#ff6b81; color:white; padding:4px 12px; border-radius:15px; font-size:12px;">December 29 • 6PM</div>
-        <div style="font-size:12px; margin-top:6px;">📍 Quezon City Circle</div>
-      </div>
-    </div>
-  </div>
+<div class="card" id="card">
+<div class="plain-bg" id="plainBg"></div>
 
-  <!-- ITO YUNG CANVA BROWSER + SAVE -->
-  <div class="owner-panel" id="ownerPanel">
-    <h3>🎨 OWNER ONLY - Ikaw lang makakakita nito Love!</h3>
-    <p style="font-size:11px; color:#666; margin-bottom:8px;">1. Pindutin Open Canva → mag-edit ka dun<br>2. I-download mo design mo as JPG/PNG<br>3. I-upload dito → auto save sa link mo!</p>
+<!-- PANGALAN - PINDUTIN LANG PARA MA-EDIT! -->
+<div id="guest" class="editable" contenteditable="true" onblur="saveAll()" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur()}">Hi, Kristine! ❤️</div>
+<div class="hint" style="position:absolute;top:50px;left:50%;transform:translateX(-50%);z-index:20;white-space:nowrap">👆 tap name para palitan</div>
 
-    <a class="btn btn-canva" href="https://www.canva.com/" target="_blank">🎨 OPEN CANVA EDITOR (Browser)</a>
-    <a class="btn btn-canva" style="background:#7b61ff;" href="https://www.canva.com/templates/?query=birthday%20invitation" target="_blank">✨ Canva Birthday Templates</a>
+<div class="default-content" id="defaultContent">
+<div style="margin-top:10px;background:#ffecf0;padding:5px 14px;border-radius:20px;font-size:11px">You're Invited! 🎉</div>
+<div style="font-size:60px;margin:15px 0">🎂</div>
+<h1 id="title" class="editable" contenteditable="true" onblur="saveAll()" style="font-family:'Great Vibes';font-size:42px;color:#d81b60;line-height:0.9">Lovemae's<br>Birthday Party</h1>
+<div class="hint">tap para palitan title</div>
 
-    <input type="file" id="fileUp" accept="image/*">
-    <button class="btn btn-upload" onclick="uploadCanva()">📁 Upload Galing Canva → Save sa Link</button>
+<div style="margin-top:auto;background:white;padding:10px 20px;border-radius:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1)">
+<div id="date" class="editable" contenteditable="true" onblur="saveAll()" style="background:#ff6b81;color:white;padding:5px 14px;border-radius:15px;font-size:11px">December 29 • 6PM</div>
+<div id="venue" class="editable" contenteditable="true" onblur="saveAll()" style="font-size:11px;margin-top:6px">📍 Quezon City Circle</div>
+<div class="hint">tap date & lugar para palitan</div>
+</div>
+</div>
+</div>
 
-    <input type="text" id="nameInput" placeholder="Lagay pangalan ng bisita: ex. Kristine">
-    <button class="btn btn-save" onclick="makeLink()">🔗 Gawa ng Personal Link</button>
-
-    <div id="linkOut" style="font-size:11px; margin-top:8px; word-break:break-all; background:#f5f5f5; padding:8px; border-radius:8px; display:none;"></div>
-
-    <button class="btn" style="background:#eee;" onclick="resetBG()">🗑️ Balik sa Default Rose</button>
-  </div>
+<div class="owner" id="ownerPanel">
+<h3 style="font-size:12px">🎨 OWNER - Hindi na kailangan bumaba lagi!</h3>
+<p style="font-size:10px;color:#666">Tap mo lang yung pangalan sa taas para ma-edit! Auto save na!</p>
+<a class="btn" style="background:#00c4cc;color:white" href="https://www.canva.com/" target="_blank">🎨 OPEN CANVA</a>
+<input type="file" id="fileUp" accept="image/*" style="width:100%;padding:7px;border:1px dashed #ff6b81;border-radius:8px;margin:5px 0;font-size:12px">
+<button class="btn" style="background:#ff6b81;color:white" onclick="uploadCanva()">📁 Upload Canva Design</button>
+<button class="btn" style="background:#eee;color:#333" onclick="makePlain()">⬜ Balik Plain</button>
+<button class="btn" style="background:#222;color:white" onclick="makeLink()">🔗 Gawa ng Link (gamit yung nasa taas)</button>
+<div id="linkOut" style="display:none;font-size:11px;background:#f5f5f5;padding:8px;border-radius:8px;word-break:break-all;margin-top:6px"></div>
+</div>
 </div>
 
 <audio id="audio" loop><source src="https://www.singing-bell.com/wp-content/uploads/2016/03/Happy-Birthday-Song-cheerful-Singing-Bell.mp3"></audio>
 
 <script>
-// Load saved Canva design
-let savedBG = localStorage.getItem('lovemae_canva_bg');
-let card = document.getElementById('card');
-if(savedBG){ card.style.backgroundImage = `url('${savedBG}')`; }
+let card=document.getElementById('card'), plainBg=document.getElementById('plainBg'), def=document.getElementById('defaultContent');
+let savedBG=localStorage.getItem('lovemae_canva_bg');
+let savedData=JSON.parse(localStorage.getItem('lovemae_data')||'{}');
+if(savedBG){ card.style.backgroundImage=`url('${savedBG}')`; card.classList.add('has-canva'); plainBg.style.display='none'; def.style.display='none'; }
+if(savedData.title) document.getElementById('title').innerHTML=savedData.title;
+if(savedData.date) document.getElementById('date').innerText=savedData.date;
+if(savedData.venue) document.getElementById('venue').innerText=savedData.venue;
+if(savedData.guest) document.getElementById('guest').innerText=savedData.guest;
 
-let params = new URLSearchParams(location.search);
-let g = params.get('name') || 'Kristine';
-document.getElementById('guest').innerText = `Hi, ${g}! ❤️`;
-document.getElementById('nameInput').value = g;
+let p=new URLSearchParams(location.search);
+let g=p.get('name');
+if(g){ document.getElementById('guest').innerText=`Hi, ${g}! ❤️`; }
+if(p.get('name')) document.getElementById('ownerPanel').style.display='none';
 
-// Hide owner panel for guests - ikaw lang makakakita pag may?owner=1 or walang name
-if(params.get('name')){ document.getElementById('ownerPanel').style.display='none'; }
-
-function start(){ document.getElementById('tap').style.display='none'; document.getElementById('audio').play().catch(()=>{}); }
+function saveAll(){
+ let data={
+  guest: document.getElementById('guest').innerText,
+  title: document.getElementById('title').innerHTML,
+  date: document.getElementById('date').innerText,
+  venue: document.getElementById('venue').innerText
+ };
+ localStorage.setItem('lovemae_data', JSON.stringify(data));
+}
 
 function uploadCanva(){
-  let file = document.getElementById('fileUp').files[0];
-  if(!file) return alert('Pili ka muna ng picture galing Canva Love!');
-  let reader = new FileReader();
-  reader.onload = function(e){
-    let base64 = e.target.result;
-    localStorage.setItem('lovemae_canva_bg', base64);
-    card.style.backgroundImage = `url('${base64}')`;
-    alert('✅ Na-save na Love! Ngayon lahat ng magbubukas ng link mo, yan na ang makikita nilang design!');
-  };
-  reader.readAsDataURL(file);
+ let f=document.getElementById('fileUp').files[0];
+ if(!f) return alert('Pili ka muna ng file Love!');
+ let r=new FileReader();
+ r.onload=e=>{
+  localStorage.setItem('lovemae_canva_bg', e.target.result);
+  card.style.backgroundImage=`url('${e.target.result}')`;
+  card.classList.add('has-canva');
+  plainBg.style.display='none';
+  def.style.display='none';
+  alert('✅ Save na! Ngayon yung Canva design mo na buo, pero yung pangalan sa taas pwede pa rin i-edit by tap!');
+ };
+ r.readAsDataURL(f);
 }
-
+function makePlain(){
+ localStorage.removeItem('lovemae_canva_bg');
+ card.style.backgroundImage=''; card.classList.remove('has-canva');
+ plainBg.style.display='block'; def.style.display='flex';
+}
 function makeLink(){
-  let name = document.getElementById('nameInput').value || 'Kristine';
-  let base = location.origin + location.pathname;
-  let link = `${base}?name=${encodeURIComponent(name)}`;
-  let out = document.getElementById('linkOut');
-  out.style.display='block';
-  out.innerHTML = `Link kay ${name}:<br><b>${link}</b><br><br><button onclick="navigator.clipboard.writeText('${link}'); alert('Na-copy na!')" style="padding:6px 12px; background:#00c4cc; color:white; border:none; border-radius:8px;">Copy Link</button>`;
+ let nameText=document.getElementById('guest').innerText.replace('Hi,','').replace('! ❤️','').replace('!','').trim()||'Kristine';
+ let base=location.origin+location.pathname;
+ let link=`${base}?name=${encodeURIComponent(nameText)}`;
+ let o=document.getElementById('linkOut'); o.style.display='block';
+ o.innerHTML=`Para kay <b>${nameText}</b>:<br>${link}<br><br><button onclick="navigator.clipboard.writeText('${link}')" style="padding:6px 12px;background:#00c4cc;color:white;border:none;border-radius:6px">Copy Link</button> <a href="${link}" target="_blank" style="padding:6px 12px;background:#222;color:white;border-radius:6px;text-decoration:none">Open</a><br><br><small>Tip: I-edit mo muna pangalan sa taas bago gumawa ng link!</small>`;
 }
-
-function resetBG(){ localStorage.removeItem('lovemae_canva_bg'); card.style.backgroundImage=''; alert('Bumalik na sa rose Love!'); }
-</script>
-</body>
-</html>
+</script></body></html>
