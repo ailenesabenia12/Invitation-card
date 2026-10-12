@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>happy Birthday - invitation Card</title>
+<title>happy Birthday - With Save</title>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -11,47 +11,45 @@ body{background:#ffeef0;font-family:'Poppins',sans-serif}
 .tapBtn{background:white;color:#ff2e63;padding:16px 36px;border-radius:30px;margin-top:16px;font-weight:800;animation:pulse 1.2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .wrap{max-width:400px;margin:0 auto;padding:12px}
-.card{width:100%;aspect-ratio:9/16;background:white;border-radius:22px;overflow:hidden;position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.25);touch-action:none;background-size:cover;background-position:center}
-#plain{position:absolute;inset:0;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5}
-#bgImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:10}
-#bgVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:10}
+.card{width:100%;aspect-ratio:9/16;background:#fff0f2;border-radius:22px;overflow:hidden;position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.25);touch-action:none}
+#bgImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:10;display:block}
+#bgVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:10;display:none}
 #guest{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:#ff1744;color:white;padding:9px 22px;border-radius:22px;font-size:16px;z-index:60;border:2px solid white;cursor:grab;touch-action:none;min-width:110px;text-align:center;user-select:text}
 .balloons{position:absolute;inset:0;pointer-events:none;z-index:45;overflow:hidden}
 .balloon{position:absolute;bottom:-100px;animation:floatUp 5s linear forwards}
 @keyframes floatUp{0%{transform:translateY(0);opacity:0}10%{opacity:1}100%{transform:translateY(-120vh) translateX(var(--d));opacity:0}}
-.btn{width:100%;padding:12px;border:none;border-radius:11px;font-weight:700;margin:5px 0;cursor:pointer;display:block;text-align:center}
+.btn{width:100%;padding:12px;border:none;border-radius:11px;font-weight:700;margin:5px 0;cursor:pointer}
 </style>
 </head>
 <body>
 
+<!-- 1. WELCOME YOU'RE INVITED -->
 <div id="welcome" onclick="startParty()">
 <div style="font-size:55px">💌</div>
 <div style="font-family:'Great Vibes';font-size:48px">Welcome</div>
 <div style="font-size:22px;font-weight:800">YOU'RE INVITED! 🎉</div>
 <div class="tapBtn">👆 TAP TO OPEN</div>
-<p style="font-size:11px;margin-top:12px">🎶 Music + 🎈 Lobo + ✨ Stars</p>
+<p style="font-size:11px;margin-top:12px">🎶 Music + 🎈 Lobo + ⭐ Stars</p>
 </div>
 
 <div class="wrap">
 <div class="card" id="card">
-<div id="plain">
-<div style="font-size:55px">upload design</div>
-<div style="font-family:'Great Vibes';font-size:30px;color:#d81b60">Loading Card...</div>
-</div>
-<img id="bgImg">
+<!-- DITO YUNG CAKE MO - WALA NANG PLAIN WHITE TEXT! -->
+<img id="bgImg" src="card.jpg">
 <video id="bgVid" loop playsinline></video>
 <div class="balloons" id="balloons"></div>
 <div id="guest" contenteditable="true">Hi, Annie! ❤️</div>
-<div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:white;font-size:8px;padding:4px 10px;border-radius:20px;z-index:70;white-space:nowrap">HOLD & DRAG • TAP TO EDIT</div>
-<div id="musicBtn" automatic="toggleMusic()" style="position:absolute;top:12px;right:12px;z-index:70;background:white;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center">🎵</div>
+<div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:white;font-size:8px;padding:4px 10px;border-radius:20px;z-index:70">HOLD & DRAG • TAP TO EDIT</div>
+<div id="musicBtn" onclick="toggleMusic()" style="position:absolute;top:12px;right:12px;z-index:70;background:white;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center">🔊</div>
 </div>
 
 <div id="owner" style="background:white;border-radius:16px;padding:12px;margin-top:12px;border:3px solid #ff6b81">
-<h3 style="font-size:12px;color:#ff1744">🎨 OWNER PANEL</h3>
-<p style="font-size:10px;color:#666">Upload mo yung card.jpg sa GitHub para makita ng lahat!</p>
+<h3 style="font-size:13px;color:#ff1744">🎨 OWNER - May SAVE na!</h3>
+<p style="font-size:10px;color:#666;margin:4px 0">Upload → Save → Makikita na ng lahat!</p>
 <input type="file" id="file" accept="image/*,video/*" style="width:100%;padding:8px;border:2px dashed #ff6b81;border-radius:8px;margin:6px 0;background:#fff0f2">
-<button class="btn" style="background:#ff6b81;color:white" onclick="upload()">📁 PREVIEW DESIGN (Temporary)</button>
-<button class="btn" style="background:#eee" onclick="makePlain()">⬜ Balik Plain White</button>
+<button class="btn" style="background:#ff6b81;color:white" onclick="upload()">📁 UPLOAD CAKE DESIGN</button>
+<button class="btn" style="background:#00c853;color:white;display:none" id="saveBtn" onclick="saveCard()">💾 SAVE PARA MAKITA NG LAHAT!</button>
+<div id="saveStatus" style="display:none;background:#e8f5e9;color:#2e7d32;padding:8px;border-radius:8px;font-size:11px;margin:6px 0;text-align:center">✅ SAVED NA! Subukan mo buksan yung link ng guest!</div>
 <input id="nameBox" value="Annie" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px">
 <button class="btn" style="background:#222;color:white" onclick="makeLink()">🔗 Gawa Link + Copy</button>
 <div id="linkBox" style="display:none;margin-top:8px;background:#f5f5f5;padding:8px;border-radius:8px;font-size:11px;word-break:break-all"></div>
@@ -62,45 +60,45 @@ body{background:#ffeef0;font-family:'Poppins',sans-serif}
 <audio id="audio" loop><source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_ee6d6a4e49.mp3"></audio>
 
 <script>
-let plain=document.getElementById('plain'), bgImg=document.getElementById('bgImg'), bgVid=document.getElementById('bgVid'), balloons=document.getElementById('balloons'), audio=document.getElementById('audio'), guest=document.getElementById('guest'), card=document.getElementById('card'), musicBtn=document.getElementById('musicBtn');
-let isVid=false, hasCard=false;
+let bgImg=document.getElementById('bgImg'), bgVid=document.getElementById('bgVid'), balloons=document.getElementById('balloons'), audio=document.getElementById('audio'), guest=document.getElementById('guest'), card=document.getElementById('card'), musicBtn=document.getElementById('musicBtn'), saveBtn=document.getElementById('saveBtn'), saveStatus=document.getElementById('saveStatus');
+let isVid=false, currentDataUrl=null;
 
-// AUTO LOAD card.jpg GALING GITHUB - PARA MAKITA NG LAHAT!
-function loadCardFromGitHub(){
- // Try lahat ng possible name
- let possible = ['card.jpg','card.png','bg.jpg','design.jpg','100092166.jpg','lovemae.jpg'];
- let loaded = false;
- possible.forEach(name => {
-  let img = new Image();
-  img.onload = function(){
-   if(!loaded){
-    loaded = true; hasCard = true;
-    bgImg.src = name + '?v=' + Date.now();
-    bgImg.style.display = 'block';
-    plain.style.display = 'none';
-    isVid = false;
-   }
-  };
-  img.src = name + '?v=' + Date.now();
- });
- // Kung wala pa ring card after 2 seconds, plain white pa rin
- setTimeout(()=>{ if(!hasCard &&!bgImg.src){ plain.innerHTML = '<div style="font-size:50px">🎂</div><div style="font-family:Great Vibes;font-size:30px;color:#d81b60">Plain White Muna</div><p style="font-size:11px;color:#999">Mag-upload ka ng card.jpg sa GitHub</p>'; } }, 2000);
+// LOAD SAVED CARD GALING SA PHONE MO
+let saved = localStorage.getItem('savedCard');
+if(saved){
+ bgImg.src = saved;
+ bgImg.style.display = 'block';
+ currentDataUrl = saved;
+ saveStatus.style.display='block';
+ saveStatus.innerHTML='✅ May naka-save na card sa phone mo!';
 }
-loadCardFromGitHub();
+// TRY LOAD card.jpg GALING GITHUB PAG WALANG SAVED
+else {
+ // Test kung may card.jpg sa GitHub
+ let test = new Image();
+ test.onload = function(){ bgImg.src = 'card.jpg?v='+Date.now(); };
+ test.onerror = function(){
+  // Kung wala pa ring card.jpg, wag ipakita plain white text, cake color lang
+  bgImg.style.background='#ffe4ec';
+  bgImg.src='';
+  bgImg.alt='';
+ };
+ test.src='card.jpg?v='+Date.now();
+}
 
 function startParty(){
  document.getElementById('welcome').style.display='none';
- if(isVid && bgVid.src){ bgVid.muted=false; bgVid.play(); musicBtn.innerText='🔊'; }
- else{ audio.volume=0.9; audio.play().catch(()=>{}); musicBtn.innerText='🔊'; }
+ if(isVid && bgVid.src){ bgVid.muted=false; bgVid.play(); }
+ else{ audio.volume=0.9; audio.play().catch(()=>{}); }
  launch(); setInterval(launch,3500);
 }
 function toggleMusic(){
- if(isVid){ if(bgVid.muted){bgVid.muted=false; musicBtn.innerText='🔊'} else{bgVid.muted=true; musicBtn.innerText='🔇'} }
- else{ if(audio.paused){audio.play(); musicBtn.innerText='🔊'} else{audio.pause(); musicBtn.innerText='🔇'} }
+ if(isVid){ bgVid.muted=!bgVid.muted; musicBtn.innerText=bgVid.muted?'🔇':'🔊'; }
+ else{ if(audio.paused){audio.play(); musicBtn.innerText='🔊';} else{audio.pause(); musicBtn.innerText='🔇';} }
 }
 function launch(){
  balloons.innerHTML='';
- let icons=['🎈','🎈','🎈','💖','🎉','🎊','✨','✨','✨'];
+ let icons=['🎈','🎈','💖','🎉','⭐','🌟','✨','💫'];
  for(let i=0;i<18;i++){
   let b=document.createElement('div'); b.className='balloon'; b.innerText=icons[Math.floor(Math.random()*icons.length)];
   b.style.left=Math.random()*88+'%'; b.style.fontSize=(18+Math.random()*30)+'px'; b.style.setProperty('--d',(Math.random()*100-50)+'px');
@@ -111,15 +109,35 @@ let drag=false,sx,sy,sl,st;
 guest.addEventListener('pointerdown',e=>{ if(document.activeElement===guest) return; drag=true; sx=e.clientX; sy=e.clientY; let r=guest.getBoundingClientRect(), cr=card.getBoundingClientRect(); sl=r.left-cr.left; st=r.top-cr.top; });
 guest.addEventListener('pointermove',e=>{ if(!drag) return; guest.style.left=(sl+(e.clientX-sx))+'px'; guest.style.top=(st+(e.clientY-sy))+'px'; guest.style.transform='none'; });
 guest.addEventListener('pointerup',()=>drag=false);
+
 function upload(){
- let f=document.getElementById('file').files[0]; if(!f) return alert('Pili ka muna sa album!');
- let url=URL.createObjectURL(f);
- if(f.type.startsWith('video/')){ bgImg.style.display='none'; bgVid.src=url; bgVid.style.display='block'; bgVid.play(); plain.style.display='none'; isVid=true; }
- else{ bgVid.style.display='none'; bgVid.pause(); bgImg.src=url; bgImg.style.display='block'; plain.style.display='none'; isVid=false; }
- launch();
- alert('Preview lang to Love! Para makita ng lahat, i-upload mo yung file na to sa GitHub as card.jpg!');
+ let f=document.getElementById('file').files[0]; if(!f) return alert('Pili ka muna ng cake design!');
+ let reader = new FileReader();
+ reader.onload = function(e){
+  currentDataUrl = e.target.result;
+  if(f.type.startsWith('video/')){
+   bgImg.style.display='none'; bgVid.src=currentDataUrl; bgVid.style.display='block'; bgVid.play(); isVid=true;
+  } else {
+   if(bgVid) bgVid.style.display='none'; bgImg.src=currentDataUrl; bgImg.style.display='block'; isVid=false;
+  }
+  saveBtn.style.display='block';
+  saveStatus.style.display='none';
+  launch();
+ };
+ reader.readAsDataURL(f);
 }
-function makePlain(){ bgImg.style.display='none'; bgVid.style.display='none'; bgVid.pause(); plain.style.display='flex'; isVid=false; }
+function saveCard(){
+ if(!currentDataUrl) return alert('Mag-upload ka muna!');
+ try{
+  localStorage.setItem('savedCard', currentDataUrl);
+  saveStatus.style.display='block';
+  saveStatus.innerHTML='✅ SAVED NA! Ngayon kahit i-refresh mo, andyan pa rin yung cake! Para makita ng LAHAT ng guests, i-upload mo rin yung picture as card.jpg sa GitHub!';
+  saveBtn.style.display='none';
+  alert('✅ SAVED NA SA PHONE MO!\n\nPara makita ng LAHAT:\n1. Pumunta sa GitHub\n2. Upload mo yung same picture as card.jpg\n3. Tapos lahat ng may link makikita na yung cake!');
+ }catch(e){
+  alert('Malaki masyado yung picture Love! Liitan mo muna sa Canva o i-upload mo directly as card.jpg sa GitHub!');
+ }
+}
 function makeLink(){
  let n=document.getElementById('nameBox').value || guest.innerText.replace(/Hi,|!|❤️/g,'').trim() || 'Annie';
  guest.innerText='Hi, '+n+'! ❤️';
@@ -129,7 +147,7 @@ function makeLink(){
  navigator.clipboard.writeText(link);
 }
 let p=new URLSearchParams(location.search);
-if(p.get('name')){ guest.innerText='Hi, '+p.get('name')+'! ❤️'; document.getElementById('owner').style.display='none'; document.getElementById('welcome').style.display='flex'; }
+if(p.get('name')){ guest.innerText='Hi, '+p.get('name')+'! ❤️'; document.getElementById('owner').style.display='none'; }
 </script>
 </body>
 </html>
