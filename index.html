@@ -1,106 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>invitition's Birthday - june 12</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<title>Lovemae - Canva Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background: linear-gradient(135deg,#ff9a9e,#fecfef); transition:0.5s;}
-.top-bar{position:fixed; top:0; left:0; right:0; background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); padding:10px; display:flex; gap:6px; justify-content:center; z-index:100; flex-wrap:wrap; box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-.top-bar button{border:none; padding:8px 12px; border-radius:20px; font-weight:700; cursor:pointer; font-size:11px;}
-.design-btn{background:#ffb3c6; color:#880e4f;}
-.design-btn.active{background:#ff1744; color:white;}
-.music-btn{background:#222; color:white;}
-.card{margin-top:85px; background:white; width:92%; max-width:380px; border-radius:30px; padding:25px 20px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.2);}
-h1{font-family:'Great Vibes',cursive; font-size:40px; color:#ff2e63; margin:8px 0; line-height:1;}
-.name{font-size:28px; font-weight:700; color:#ff4757; margin:12px 0; border:2px dashed transparent; padding:5px; border-radius:10px; cursor:pointer;}
-.name:hover{border-color:#ffb3c6; background:#fff0f5;}
-.edit-hint{font-size:11px; color:#ff6b81; margin-bottom:8px;}
-.date-badge{background:#ff6b81; color:white; padding:8px 20px; border-radius:30px; display:inline-block; font-weight:700; margin:12px 0;}
-.cake{font-size:65px; margin:8px 0;}
-.info{margin:6px 0; font-size:14px;}
-canvas{position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:50;}
-.owner-panel{margin-top:12px; background:#fff0f5; padding:10px; border-radius:15px; width:92%; max-width:380px; text-align:center;}
-.owner-panel input{width:65%; padding:8px; border:2px solid #ffb3c6; border-radius:20px; text-align:center; font-weight:700; font-size:13px;}
-.owner-panel button{padding:8px 10px; border:none; background:#ff1744; color:white; border-radius:20px; font-weight:700; cursor:pointer; margin-left:3px; font-size:12px;}
-.suggest-btn{margin-top:12px; background:#ff6b81; color:white; border:none; padding:10px 20px; border-radius:25px; font-weight:700; cursor:pointer; width:100%;}
+body{font-family:'Poppins',sans-serif; background:#1e1e1e; color:white; overflow:hidden;}
+#welcome{position:fixed; inset:0; background:linear-gradient(135deg,#ff9a9e,#ff6b81); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer;}
+#welcome h1{font-family:'Great Vibes',cursive; font-size:55px;}
+.tap{margin-top:20px; background:white; color:#ff2e63; padding:12px 30px; border-radius:30px; font-weight:700; animation: pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.editor{display:flex; height:100vh; padding-top:0;}
+.sidebar{width:70px; background:#2d2d2d; display:flex; flex-direction:column; align-items:center; gap:12px; padding:12px 5px;}
+.sidebar button{width:50px; height:50px; border-radius:12px; border:none; background:#3d3d3d; color:white; font-size:20px; cursor:pointer;}
+.sidebar button:hover{background:#ff6b81;}
+.panel{width:220px; background:#252525; padding:12px; overflow-y:auto;}
+.panel h4{font-size:12px; margin:12px 0 6px; color:#ffb3c6;}
+.panel button, .panel label{display:block; width:100%; margin:4px 0; padding:8px; border-radius:8px; border:1px solid #444; background:#333; color:white; font-size:11px; cursor:pointer; text-align:center;}
+.panel button.active{background:#ff1744;}
+.canvas-area{flex:1; background:#181818; display:flex; align-items:center; justify-content:center; position:relative;}
+#myCanvas{box-shadow:0 20px 60px rgba(0,0,0,0.6); border-radius:12px;}
+.bottom-bar{position:fixed; bottom:0; left:0; right:0; background:#2d2d2d; padding:8px; display:flex; justify-content:center; gap:8px; z-index:100;}
+.bottom-bar button{padding:8px 14px; border-radius:20px; border:none; font-weight:700; cursor:pointer; font-size:12px;}
+input[type=file]{display:none;}
 </style>
 </head>
 <body>
-<canvas id="confetti"></canvas>
 
-<div class="top-bar">
-  <button class="design-btn active" onclick="setTheme(1)">🎀 Pink</button>
-  <button class="design-btn" onclick="setTheme(2)">☁️ Clouds</button>
-  <button class="design-btn" onclick="setTheme(3)">🎂 Cake</button>
-  <button class="music-btn" id="musicBtn" onclick="playMusic()">🔊 Play</button>
+<div id="welcome" onclick="startEditor()">
+  <div style="font-size:70px;">💌</div>
+  <h1>Lovemae's Birthday</h1>
+  <p>Canva Editor • Tap to Open</p>
+  <div class="tap">👆 Tap to Start Editing + Music</div>
 </div>
 
-<div class="card">
-  <div style="font-size:20px;">🎉 You're Invited! 🎉</div>
-  <div class="name" id="guestName" onclick="editName()">Hi Friend! ✏️</div>
-  <div class="edit-hint">👆 Pindutin para i-edit!</div>
-  <p style="font-size:14px;">Join us to celebrate</p>
-  <h1>Lovemae's Birthday Party</h1>
-  <div class="cake" id="cakeIcon">🎂</div>
-  <div class="date-badge">June 12</div>
-  <p style="margin-top:8px; font-size:13px;"><b>We can't wait to see you!</b></p>
-  <div class="info">📍 Quezon City Circle</div>
-  <div class="info">🕕 6PM</div>
-  <button class="suggest-btn" onclick="openSuggest()">💡 Suggest Design</button>
-</div>
+<div class="editor">
+  <div class="sidebar">
+    <button onclick="setPanel('templates')" title="Templates">🎨</button>
+    <button onclick="setPanel('upload')" title="Upload">🖼️</button>
+    <button onclick="addText()" title="Text">🔤</button>
+    <button onclick="setPanel('music')" title="Music">🎵</button>
+    <button onclick="saveImage()" title="Save">📸</button>
+  </div>
+  
+  <div class="panel" id="panel">
+    <div id="panel-templates">
+      <h4>🎨 3D Templates - Pindutin para magpalit</h4>
+      <button onclick="setTemplate('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&q=80')">🌸 Floral Luxury - 3D</button>
+      <button onclick="setTemplate('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80')">🎀 Pink Party - 3D</button>
+      <button onclick="setTemplate('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80')">✨ Gold Elegant - 3D</button>
+      <button onclick="setTemplate('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=80')">🎈 Balloons Real</button>
+      <h4>💡 Tip: Lahat ng text pwede i-drag!</h4>
+    </div>
+    <div id="panel-upload" style="display:none;">
+      <h4>🖼️ Upload Picture ni Lovemae</h4>
+      <label for="imgUpload">📁 Choose Picture</label>
+      <input type="file" id="imgUpload" accept="image/*" onchange="uploadImage(event)">
+      <button onclick="addCake()">🎂 Add Cake Sticker</button>
+      <button onclick="addBalloons()">🎈 Add Balloons</button>
+      <p style="font-size:10px; margin-top:10px; color:#aaa;">Pag na-upload na, pwede mo i-drag at palakihin yung picture sa card!</p>
+    </div>
+    <div id="panel-music" style="display:none;">
+      <h4>🎵 Music - Auto Play pag tinap!</h4>
+      <button onclick="setMusic(1)">🎶 Happy Birthday Classic</button>
+      <button onclick="setMusic(2)">🎵 Happy Birthday Remix</button>
+      <button onclick="toggleMusic()" id="musicBtn2">🔊 Play/Pause</button>
+      <p style="font-size:10px; margin-top:8px; color:#aaa;">Trick: Pag nag-tap sa welcome, kusa na tutugtog! Yan ang Canva style.</p>
+    </div>
+  </div>
 
-<div class="owner-panel">
-  <p style="font-size:11px; margin-bottom:5px;">✏️ Owner: Palitan mo "Hi Friend!"</p>
-  <input type="text" id="nameInput" placeholder="Ex: Kristine">
-  <button onclick="saveName()">Save</button>
-  <p id="copyLink" style="font-size:10px; margin-top:6px; word-break:break-all; color:#555;"></p>
-</div>
-
-<!-- SUGGEST MODAL -->
-<div id="suggestModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:999; align-items:center; justify-content:center; padding:15px;">
-  <div style="background:white; padding:20px; border-radius:20px; width:100%; max-width:340px; text-align:center;">
-    <h3 style="color:#ff2e63;">Anong design gusto mo? 🎨</h3>
-    <select id="suggestType" style="width:100%; padding:10px; border-radius:10px; border:2px solid #ffb3c6; margin:10px 0; font-size:13px;">
-      <option>🎀 Mas Pink pa!</option>
-      <option>🎈 Mas maraming Balloons</option>
-      <option>🎂 May picture ni Ailene</option>
-      <option>✨ Mas simple / Minimalist</option>
-      <option>💌 Gusto ko may flowers</option>
-      <option>📝 Iba pa...</option>
-    </select>
-    <textarea id="suggestText" placeholder="Type mo suggestion mo..." style="width:100%; height:70px; padding:10px; border-radius:10px; border:2px solid #ffb3c6; margin:8px 0; font-size:13px;"></textarea>
-    <button onclick="sendSuggest()" style="background:#ff1744; color:white; border:none; padding:10px; border-radius:20px; font-weight:700; width:100%; cursor:pointer;">Send 💌</button>
-    <button onclick="closeSuggest()" style="background:#eee; border:none; padding:7px 15px; border-radius:20px; margin-top:8px; cursor:pointer; font-size:12px;">Close</button>
-    <div id="suggestList" style="margin-top:10px; text-align:left; font-size:11px; max-height:80px; overflow-y:auto; background:#fff0f5; padding:8px; border-radius:10px;"></div>
+  <div class="canvas-area">
+    <canvas id="myCanvas" width="360" height="560"></canvas>
   </div>
 </div>
 
+<div class="bottom-bar">
+  <button style="background:#ff1744; color:white;" onclick="deleteSelected()">🗑️ Delete Selected</button>
+  <button style="background:white; color:#222;" onclick="saveImage()">📸 Save / Screenshot</button>
+  <button style="background:#222; color:white;" onclick="shareLink()">🔗 Copy Link with Name</button>
+</div>
+
 <audio id="bdayAudio" loop preload="auto">
-  <source src="https://www.singing-bell.com/wp-content/uploads/2016/03/Happy-Birthday-Song-cheerful-Singing-Bell.mp3" type="audio/mpeg">
+  <source id="audioSrc" src="https://www.singing-bell.com/wp-content/uploads/2016/03/Happy-Birthday-Song-cheerful-Singing-Bell.mp3">
 </audio>
 
 <script>
-const guestEl=document.getElementById('guestName');
-const inputEl=document.getElementById('nameInput');
-const linkEl=document.getElementById('copyLink');
-const params=new URLSearchParams(window.location.search);
-const urlName=params.get('name');
-if(urlName){ guestEl.innerHTML=`Hi, ${urlName}! ❤️ ✏️`; linkEl.innerHTML=`Link: ?name=${urlName}`; }
-else{ const saved=localStorage.getItem('lovemae_name'); if(saved){ guestEl.innerHTML=saved+' ✏️'; } }
+let canvas;
+function startEditor(){
+  document.getElementById('welcome').style.display='none';
+  initCanvas();
+  const a=document.getElementById('bdayAudio'); a.play().then(()=>{document.getElementById('musicBtn2').innerText='⏸️ Pause Music 🎶';}).catch(()=>{});
+}
 
-function editName(){ const cur=guestEl.innerText.replace('✏️','').trim(); const n=prompt("Palitan mo 'Hi Friend!'?",cur); if(n&&n.trim()!=''){ guestEl.innerHTML=n+' ✏️'; localStorage.setItem('lovemae_name',n); inputEl.value=n; updateLink(n); } }
-function saveName(){ let v=inputEl.value.trim(); if(!v) return; let f=v; if(!v.toLowerCase().startsWith('hi')) f=`Hi, ${v}! ❤️`; guestEl.innerHTML=f+' ✏️'; localStorage.setItem('lovemae_name',f); updateLink(v); }
-function updateLink(v){ const base=location.origin+location.pathname; const link=`${base}?name=${encodeURIComponent(v)}`; linkEl.innerHTML=`Copy link:<br><b style="font-size:10px;">${link}</b><br><button onclick="navigator.clipboard.writeText('${link}');alert('Na-copy na!')" style="margin-top:5px; padding:5px 10px; background:#222; color:white; border:none; border-radius:10px;">📋 Copy</button>`; }
-function setTheme(n){ document.body.style.background=n==1?'linear-gradient(135deg,#ff9a9e,#fecfef)':n==2?'linear-gradient(180deg,#fff0f5,#ff8fab)':'#ffc8dd'; document.querySelectorAll('.design-btn').forEach(b=>b.classList.remove('active')); event.target.classList.add('active'); fireConfetti(); tryAutoPlay(); }
-let playing=false; function playMusic(){ const a=document.getElementById('bdayAudio'); const b=document.getElementById('musicBtn'); if(!playing){ a.play().then(()=>{b.innerText='⏸️ Pause 🎶'; playing=true; fireConfetti();}); } else{ a.pause(); b.innerText='🔊 Play'; playing=false; } }
-let autoPlayed=false; function tryAutoPlay(){ if(autoPlayed||playing) return; const a=document.getElementById('bdayAudio'); a.play().then(()=>{playing=true; autoPlayed=true; document.getElementById('musicBtn').innerText='⏸️ Pause 🎶'; fireConfetti();}).catch(()=>{}); }
-document.body.addEventListener('click', tryAutoPlay); document.body.addEventListener('touchstart', tryAutoPlay);
-function openSuggest(){ document.getElementById('suggestModal').style.display='flex'; } function closeSuggest(){ document.getElementById('suggestModal').style.display='none'; }
-function sendSuggest(){ const type=document.getElementById('suggestType').value; const text=document.getElementById('suggestText').value; const name=params.get('name')||'Guest'; let s=JSON.parse(localStorage.getItem('suggestions')||'[]'); s.push({name,type,text,time:new Date().toLocaleString()}); localStorage.setItem('suggestions',JSON.stringify(s)); document.getElementById('suggestList').innerHTML=s.slice(-5).map(x=>`👤 <b>${x.name}</b>: ${x.type} ${x.text?'- '+x.text:''}`).reverse().join('<br>'); alert(`Thanks ${name}! Na-save: ${type} ❤️`); document.getElementById('suggestText').value=''; closeSuggest(); }
-const canvas=document.getElementById('confetti'); const ctx=canvas.getContext('2d'); canvas.width=innerWidth; canvas.height=innerHeight; let pieces=[]; function fireConfetti(){ for(let i=0;i<100;i++) pieces.push({x:Math.random()*canvas.width,y:-10,r:Math.random()*8+4,c:`hsl(${Math.random()*360},100%,60%)`,vy:Math.random()*4+2,vx:Math.random()*6-3}); } (function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); pieces.forEach((p,i)=>{ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28); ctx.fill(); p.y+=p.vy; p.x+=p.vx; if(p.y>canvas.height) pieces.splice(i,1);}); requestAnimationFrame(loop);})(); fireConfetti();
+function initCanvas(){
+  canvas = new fabric.Canvas('myCanvas', {preserveObjectStacking:true});
+  const params=new URLSearchParams(location.search);
+  const guestName=params.get('name')||'Kristine';
+  
+  // Background
+  fabric.Image.fromURL('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&q=80', function(img){
+    img.set({scaleX: canvas.width / img.width, scaleY: canvas.height / img.height});
+    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+  }, {crossOrigin:'anonymous'});
+
+  // Texts - pwede i-drag lahat parang Canva!
+  const title = new fabric.Text("You're Invited! 🎉", {left:70, top:20, fontSize:18, fontFamily:'Poppins', fill:'#880e4f', fontWeight:'600'});
+  const guest = new fabric.Text(`Hi, ${guestName}! ❤️`, {left:80, top:60, fontSize:22, fontFamily:'Poppins', fill:'#ff1744', fontWeight:'bold', editable:true});
+  const main = new fabric.Text("Lovemae's\nBirthday Party", {left:50, top:110, fontSize:38, fontFamily:'Great Vibes', fill:'#d81b60', textAlign:'center', lineHeight:1});
+  const date = new fabric.Text("December 29 • 6PM", {left:70, top:260, fontSize:14, fontFamily:'Poppins', fill:'white', backgroundColor:'#ff6b81', padding:10});
+  const venue = new fabric.Text("📍 Quezon City Circle", {left:70, top:300, fontSize:13, fontFamily:'Poppins', fill:'#444'});
+  const cake = new fabric.Text("🎂", {left:150, top:340, fontSize:60});
+
+  canvas.add(title, guest, main, date, venue, cake);
+}
+
+function setPanel(p){
+  document.getElementById('panel-templates').style.display=p=='templates'?'block':'none';
+  document.getElementById('panel-upload').style.display=p=='upload'?'block':'none';
+  document.getElementById('panel-music').style.display=p=='music'?'block':'none';
+}
+
+function setTemplate(url){
+  fabric.Image.fromURL(url, function(img){
+    img.set({scaleX: canvas.width / img.width, scaleY: canvas.height / img.height});
+    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+  }, {crossOrigin:'anonymous'});
+}
+
+function addText(){
+  const t = new fabric.Text("Your Text Here ✏️", {left:100, top:200, fontSize:20, fontFamily:'Poppins', fill:'#333', editable:true});
+  canvas.add(t); canvas.setActiveObject(t);
+}
+
+function uploadImage(e){
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    fabric.Image.fromURL(ev.target.result, function(img){
+      img.set({left:100, top:150, scaleX:0.3, scaleY:0.3, cornerSize:10, transparentCorners:false});
+      canvas.add(img); canvas.setActiveObject(img);
+    });
+  };
+  reader.readAsDataURL(file);
+}
+
+function addCake(){ const t=new fabric.Text("🎂🎉", {left:120, top:400, fontSize:50}); canvas.add(t); }
+function addBalloons(){ const t=new fabric.Text("🎈🎈🎈", {left:100, top:20, fontSize:30}); canvas.add(t); }
+
+function deleteSelected(){ const o=canvas.getActiveObject(); if(o) canvas.remove(o); }
+
+function saveImage(){
+  const link=document.createElement('a');
+  link.download='Lovemae-Birthday-3D-Card.png';
+  link.href=canvas.toDataURL({format:'png', quality:1});
+  link.click();
+  alert('Na-save na Love! 📸 Nasa Downloads mo na yung 3D card!');
+}
+
+function shareLink(){
+  const name=prompt('Anong pangalan ng bibigyan mo ng link? Ex: Kristine');
+  if(name){
+    const base=location.origin+location.pathname;
+    const url=`${base}?name=${encodeURIComponent(name)}`;
+    navigator.clipboard.writeText(url);
+    alert(`Na-copy na Love! 🔗\n${url}\n\nI-send mo kay ${name}!`);
+  }
+}
+
+function setMusic(n){
+  const src=document.getElementById('audioSrc'); const a=document.getElementById('bdayAudio');
+  src.src=n==1?"https://www.singing-bell.com/wp-content/uploads/2016/03/Happy-Birthday-Song-cheerful-Singing-Bell.mp3":"https://www.singing-bell.com/wp-content/uploads/2019/01/Happy-Birthday-To-You-Happy-Birthday-Songs-2019.mp3";
+  a.load(); a.play();
+}
+function toggleMusic(){
+  const a=document.getElementById('bdayAudio'); if(a.paused){a.play(); event.target.innerText='⏸️ Pause Music 🎶';} else {a.pause(); event.target.innerText='🔊 Play Music';}
+}
 </script>
 </body>
 </html>
