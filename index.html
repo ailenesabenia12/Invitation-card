@@ -3,50 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>invitation's Birthday - june 12</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:0.5s; background: linear-gradient(135deg,#ff9a9e,#fecfef);}
-.top-bar{position:fixed; top:0; left:0; right:0; background:rgba(255,255,255,0.95); padding:10px; display:flex; gap:8px; justify-content:center; z-index:100; flex-wrap:wrap;}
-.top-bar button{border:none; padding:9px 14px; border-radius:20px; font-weight:700; cursor:pointer; font-size:12px;}
-.design-btn{background:#ffb3c6; color:#880e4f;}
-.design-btn.active{background:#ff1744; color:white;}
-.music-btn{background:#222; color:white;}
-.card{margin-top:90px; background:white; width:92%; max-width:380px; border-radius:30px; padding:30px 20px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.2); position:relative;}
-h1{font-family:'Great Vibes',cursive; font-size:42px; color:#ff2e63; margin:10px 0;}
-.name-wrap{position:relative; display:inline-block;}
-.name{font-size:32px; font-weight:700; color:#ff4757; margin:15px 0; border:2px dashed transparent; padding:5px 15px; border-radius:10px; cursor:pointer; transition:0.3s;}
-.name:hover{border-color:#ffb3c6; background:#fff0f5;}
-.edit-hint{font-size:11px; color:#ff6b81; margin-top:-10px; margin-bottom:10px;}
-.date-badge{background:#ff6b81; color:white; padding:10px 22px; border-radius:30px; display:inline-block; font-weight:700; margin:15px 0;}
-.cake{font-size:70px;}
-.info{margin:8px 0;}
-canvas{position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:50;}
-.owner-panel{margin-top:15px; background:#fff0f5; padding:12px; border-radius:15px; width:92%; max-width:380px; text-align:center;}
-.owner-panel input{width:70%; padding:8px 12px; border:2px solid #ffb3c6; border-radius:20px; text-align:center; font-weight:700;}
-.owner-panel button{padding:8px 12px; border:none; background:#ff1744; color:white; border-radius:20px; font-weight:700; cursor:pointer; margin-left:5px;}
-</style>
-</head>
-<body>
-
-<canvas id="confetti"></canvas>
-
-<div class="top-bar">
-  <button class="design-btn active" onclick="setTheme(1)">🎀 Pink</button>
-  <button class="design-btn" onclick="setTheme(2)">☁️ Clouds</button>
-  <button class="design-btn" onclick="setTheme(3)">🎂 Cake</button>
-  <button class="music-btn" id="musicBtn" onclick="playMusic()">🔊 Play</button>
-</div>
-
-<div class="card">
-  <div style="font-size:22px;">🎉 You're Invited! 🎉</div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lovemae's Birthday - Dec 29</title>
+<title>invitition's Birthday - june 12</title>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -109,7 +66,7 @@ canvas{position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:no
     <select id="suggestType" style="width:100%; padding:10px; border-radius:10px; border:2px solid #ffb3c6; margin:10px 0; font-size:13px;">
       <option>🎀 Mas Pink pa!</option>
       <option>🎈 Mas maraming Balloons</option>
-      <option>🎂 May picture ni Lovemae</option>
+      <option>🎂 May picture ni Ailene</option>
       <option>✨ Mas simple / Minimalist</option>
       <option>💌 Gusto ko may flowers</option>
       <option>📝 Iba pa...</option>
@@ -144,97 +101,6 @@ document.body.addEventListener('click', tryAutoPlay); document.body.addEventList
 function openSuggest(){ document.getElementById('suggestModal').style.display='flex'; } function closeSuggest(){ document.getElementById('suggestModal').style.display='none'; }
 function sendSuggest(){ const type=document.getElementById('suggestType').value; const text=document.getElementById('suggestText').value; const name=params.get('name')||'Guest'; let s=JSON.parse(localStorage.getItem('suggestions')||'[]'); s.push({name,type,text,time:new Date().toLocaleString()}); localStorage.setItem('suggestions',JSON.stringify(s)); document.getElementById('suggestList').innerHTML=s.slice(-5).map(x=>`👤 <b>${x.name}</b>: ${x.type} ${x.text?'- '+x.text:''}`).reverse().join('<br>'); alert(`Thanks ${name}! Na-save: ${type} ❤️`); document.getElementById('suggestText').value=''; closeSuggest(); }
 const canvas=document.getElementById('confetti'); const ctx=canvas.getContext('2d'); canvas.width=innerWidth; canvas.height=innerHeight; let pieces=[]; function fireConfetti(){ for(let i=0;i<100;i++) pieces.push({x:Math.random()*canvas.width,y:-10,r:Math.random()*8+4,c:`hsl(${Math.random()*360},100%,60%)`,vy:Math.random()*4+2,vx:Math.random()*6-3}); } (function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); pieces.forEach((p,i)=>{ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28); ctx.fill(); p.y+=p.vy; p.x+=p.vx; if(p.y>canvas.height) pieces.splice(i,1);}); requestAnimationFrame(loop);})(); fireConfetti();
-</script>
-</body>
-</html>
-  <div class="name-wrap">
-    <div class="name" id="guestName" onclick="editName()">Hi Friend! ✏️</div>
-  </div>
-  <div class="edit-hint">👆 Pindutin para i-edit!</div>
-
-  <p>Join us to celebrate</p>
-  <h1>Ailene's Birthday Party</h1>
-  <div class="cake" id="cakeIcon">🎂</div>
-  <div class="date-badge">December 29</div>
-  <p style="margin-top:10px;"><b>We can't wait to see you!</b></p>
-  <div class="info">📍 Quezon City Circle</div>
-  <div class="info">🕕 6PM</div>
-</div>
-
-<div class="owner-panel">
-  <p style="font-size:12px; margin-bottom:6px;">✏️ Owner Edit: Palitan mo dito yung "Hi Friend!"</p>
-  <input type="text" id="nameInput" placeholder="Ex: Hi Lovemae!">
-  <button onclick="saveName()">Save</button>
-  <p id="copyLink" style="font-size:11px; margin-top:8px; word-break:break-all; color:#555;"></p>
-</div>
-
-<audio id="bdayAudio" loop>
-  <source src="https://www.singing-bell.com/wp-content/uploads/2016/03/Happy-Birthday-Song-cheerful-Singing-Bell.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-const guestEl = document.getElementById('guestName');
-const inputEl = document.getElementById('nameInput');
-const linkEl = document.getElementById('copyLink');
-
-// 1. Kung may?name= sa link, yun ang ipakita
-const params = new URLSearchParams(window.location.search);
-const urlName = params.get('name');
-if(urlName){
-  guestEl.innerHTML = `Hi, ${urlName}! ❤️ ✏️`;
-  linkEl.innerHTML = `Link na to:?name=${urlName}`;
-} else {
-  // 2. Kung wala, tingnan kung may na-save dati
-  const saved = localStorage.getItem('lovemae_name');
-  if(saved){ guestEl.innerHTML = saved + ' ✏️'; inputEl.value = saved.replace('Hi, ','').replace('!','').replace('❤️','').trim(); }
-}
-
-function editName(){
-  const current = guestEl.innerText.replace('✏️','').trim();
-  const newName = prompt("Anong gusto mo ipalit sa 'Hi Friend!'?", current);
-  if(newName && newName.trim()!=''){
-    const finalText = newName;
-    guestEl.innerHTML = finalText + ' ✏️';
-    localStorage.setItem('lovemae_name', finalText);
-    inputEl.value = finalText;
-    updateLink(finalText);
-  }
-}
-
-function saveName(){
-  const val = inputEl.value.trim();
-  if(!val) return;
-  let finalText = val;
-  if(!val.toLowerCase().startsWith('hi')) finalText = `Hi, ${val}! ❤️`;
-  guestEl.innerHTML = finalText + ' ✏️';
-  localStorage.setItem('lovemae_name', finalText);
-  updateLink(val);
-}
-
-function updateLink(val){
-  const base = window.location.origin + window.location.pathname;
-  const link = `${base}?name=${encodeURIComponent(val)}`;
-  linkEl.innerHTML = `Copy mo tong link para sa bisita mo:<br><b>${link}</b><br><button onclick="navigator.clipboard.writeText('${link}');alert('Na-copy na Love!')">📋 Copy Link</button>`;
-}
-
-function setTheme(n){
-  document.body.style.background = n==1? 'linear-gradient(135deg,#ff9a9e,#fecfef)' : n==2? 'linear-gradient(180deg,#fff0f5,#ff8fab)' : '#ffc8dd';
-  document.querySelectorAll('.design-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  fireConfetti();
-}
-
-let playing=false;
-function playMusic(){
-  const a=document.getElementById('bdayAudio'); const b=document.getElementById('musicBtn');
-  if(!playing){ a.play(); b.innerText='⏸️ Pause'; playing=true; fireConfetti(); }
-  else{ a.pause(); b.innerText='🔊 Play'; playing=false; }
-}
-
-const canvas=document.getElementById('confetti'); const ctx=canvas.getContext('2d');
-canvas.width=innerWidth; canvas.height=innerHeight; let pieces=[];
-function fireConfetti(){ for(let i=0;i<100;i++) pieces.push({x:Math.random()*canvas.width,y:-10,r:Math.random()*8+4,c:`hsl(${Math.random()*360},100%,60%)`,vy:Math.random()*4+2,vx:Math.random()*6-3}); }
-(function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); pieces.forEach((p,i)=>{ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28); ctx.fill(); p.y+=p.vy; p.x+=p.vx; if(p.y>canvas.height) pieces.splice(i,1);}); requestAnimationFrame(loop);})(); fireConfetti();
 </script>
 </body>
 </html>
