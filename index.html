@@ -2,108 +2,26 @@
 <html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lovemae Birthday - List 1-5 Final</title>
+<title>Lovemae Birthday - Fixed Google Search Bug</title>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#ffeef0;font-family:'Poppins',sans-serif}
-#welcome{position:fixed;inset:0;background:linear-gradient(135deg,#ff9a9e 0%, #fecfef 50%, #ff6b81 100%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;cursor:pointer}
-.welcomeBtn{background:white;color:#ff2e63;padding:16px 36px;border-radius:30px;margin-top:16px;font-weight:800;font-size:16px;animation:pulse 1.2s infinite;box-shadow:0 10px 25px rgba(0,0,0,0.2)}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
-.wrap{max-width:400px;margin:0 auto;padding:12px}
-.card{width:100%;aspect-ratio:9/16;background:white;border-radius:22px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,0.25);touch-action:none}
-.plain{position:absolute;inset:0;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center}
-#bgImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
-#bgVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
-#guest{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:#ff1744;color:white;padding:10px 22px;border-radius:22px;font-size:16px;z-index:60;box-shadow:0 5px 18px rgba(0,0,0,0.35);border:2px solid white;text-align:center;cursor:grab;touch-action:none;min-width:110px;user-select:text}
-#guest:active{cursor:grabbing;scale:1.05}
-.balloons{position:absolute;inset:0;pointer-events:none;z-index:50;overflow:hidden}
-.balloon{position:absolute;bottom:-120px;animation:floatUp linear forwards}
-@keyframes floatUp{0%{transform:translateY(0) translateX(0); opacity:0}10%{opacity:1}100%{transform:translateY(-130vh) translateX(var(--drift)) rotate(15deg); opacity:0}}
-.btn{width:100%;padding:12px;border:none;border-radius:11px;font-weight:700;margin:5px 0;cursor:pointer;display:block;text-align:center;text-decoration:none}
-.musicBtn{position:absolute;top:12px;right:12px;z-index:70;background:white;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.25);cursor:pointer}
+*{margin:0;padding:0;box-sizing:border-box; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none}
+body{background:#ffeef0;font-family:'Poppins',sans-serif; overscroll-behavior:none}
+#welcome{position:fixed;inset:0;background:linear-gradient(135deg,#ff9a9e,#ff6b81);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;touch-action:manipulation}
+.tapBtn{background:white;color:#ff2e63;padding:18px 38px;border-radius:40px;margin-top:18px;font-weight:800;font-size:17px;box-shadow:0 10px 25px rgba(0,0,0,0.2);pointer-events:none}
+.card{width:100%;max-width:400px;margin:0 auto;aspect-ratio:9/16;background:white;border-radius:22px;overflow:hidden;position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.2);touch-action:none}
+#guest{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:#ff1744;color:white;padding:9px 22px;border-radius:22px;font-size:16px;z-index:60;border:2px solid white;touch-action:none;cursor:grab;min-width:110px;text-align:center; -webkit-user-select:text; user-select:text}
+.balloons{position:absolute;inset:0;pointer-events:none;z-index:45;overflow:hidden}
+.balloon{position:absolute;bottom:-120px;animation:floatUp 6s linear forwards}
+@keyframes floatUp{0%{transform:translateY(0);opacity:0}10%{opacity:1}100%{transform:translateY(-130vh) translateX(var(--d));opacity:0}}
+.btn{width:100%;padding:12px;border:none;border-radius:11px;font-weight:700;margin:5px 0;cursor:pointer}
 </style>
 </head>
 <body>
 
-<!-- 1. WELCOME YOUR INVITED PAG OPEN NG LINK -->
-<div id="welcome" onclick="startParty()">
-<div style="font-size:60px">💌</div>
-<div style="font-family:'Great Vibes';font-size:50px;line-height:1">Welcome</div>
-<div style="font-size:22px;font-weight:800;margin-top:2px;letter-spacing:1px">YOU'RE INVITED! 🎉</div>
-<p style="font-size:12px;margin-top:8px;opacity:0.9">Lovemae's Birthday Party</p>
-<div class="welcomeBtn">👆 TAP TO OPEN</div>
-<p style="font-size:10px;margin-top:12px;opacity:0.8">May music + lobo + stars! 🎶🎈✨</p>
-</div>
-
-<div class="wrap">
-<div class="card" id="card">
-<!-- 2. PLAIN LANG WHITE -->
-<div class="plain" id="plain">
-<div style="font-size:50px">🎂</div>
-<div style="font-family:'Great Vibes';font-size:32px;color:#d81b60;margin-top:8px">Plain White Muna</div>
-<p style="font-size:11px;color:#999;margin-top:4px">Mag-upload ka sa baba para magka-design</p>
-</div>
-
-<!-- 3. UPLOAD GALLERY / VIDEO NA MAY MUSIC -->
-<img id="bgImage">
-<video id="bgVideo" loop playsinline></video>
-
-<div class="balloons" id="balloons"></div>
-<div class="musicBtn" id="musicBtn" onclick="toggleMusic()">🎵</div>
-
-<!-- 4. EDIT NAME + DRAG PARA DI HARANG -->
-<div id="guest" contenteditable="true">Hi, Annie! ❤️</div>
-
-<div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:8px;background:rgba(0,0,0,0.6);color:white;padding:4px 10px;border-radius:20px;z-index:55;white-space:nowrap">HOLD & DRAG pangalan • TAP para edit</div>
-</div>
-
-<div id="owner" style="background:white;border-radius:16px;padding:12px;margin-top:12px;border:3px solid #ff6b81">
-<h3 style="font-size:13px;color:#ff1744">🎨 OWNER PANEL - List 1-5!</h3>
-
-<!-- 3. UPLOAD GALING ALBUM / VIDEO NA MAY MUSIC -->
-<p style="font-size:10px;color:#666;margin:6px 0">Pili ka ng design galing album o video na may music na!</p>
-<input type="file" id="file" accept="image/*,video/*" style="width:100%;padding:8px;border:2px dashed #ff6b81;border-radius:8px;background:#fff0f2">
-<p style="font-size:9px;color:#999">✅ Pwede Image (JPG/PNG) o Video (MP4) na may kanta!</p>
-
-<button class="btn" style="background:#ff6b81;color:white" onclick="uploadDesign()">📁 UPLOAD DESIGN / VIDEO WITH MUSIC</button>
-<button class="btn" style="background:#eee" onclick="makePlain()">⬜ Balik Plain White (No.2)</button>
-
-<div style="background:#fff0f2;padding:10px;border-radius:10px;margin-top:8px">
-<input type="text" id="nameBox" value="Annie" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd">
-<button class="btn" style="background:#222;color:white" onclick="createLink()">🔗 Gawa Link + Auto Copy</button>
-<div id="linkBox" style="display:none;margin-top:8px"></div>
-</div>
-
-<button class="btn" style="background:#ffe4e6;color:#ff1744" onclick="launchBalloons()">🎈 Epic Lobo + Stars ulit! (No.5)</button>
-<button class="btn" style="background:#f5f5f5;font-size:11px" onclick="resetPos()">↺ Reset Position ng Pangalan</button>
-</div>
-</div>
-
-<audio id="audio" loop preload="auto">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_ee6d6a4e49.mp3?filename=happy-birthday-114592.mp3">
-</audio>
-
-<script>
-let card=document.getElementById('card'), guest=document.getElementById('guest'), balloons=document.getElementById('balloons'), audio=document.getElementById('audio'), bgImage=document.getElementById('bgImage'), bgVideo=document.getElementById('bgVideo'), plain=document.getElementById('plain');
-let isPlaying=false, currentVideoHasMusic=false;
-
-let savedBg=localStorage.getItem('lovemae_list_bg');
-let savedBgType=localStorage.getItem('lovemae_list_type');
-let savedName=localStorage.getItem('lovemae_list_name');
-let savedPos=JSON.parse(localStorage.getItem('lovemae_list_pos')||'null');
-
-if(savedBg){
- if(savedBgType==='video'){ bgVideo.src=savedBg; bgVideo.style.display='block'; plain.style.display='none'; }
- else { bgImage.src=savedBg; bgImage.style.display='block'; plain.style.display='none'; }
-}
-if(savedName) guest.innerText=savedName;
-if(savedPos){ guest.style.top=savedPos.top; guest.style.left=savedPos.left; guest.style.transform='none'; }
-
-let p=new URLSearchParams(location.search);
-if(p.get('name')){ guest.innerText=`Hi, ${p.get('name')}! ❤️`; owner.style.display='none'; }
-
-// 1. WELCOME + 5. EPIC LOBO STAR + MUSIC
-function startParty(){
- document.getElementById('welcome').style.display='none';
- if(bgVideo.style.display==='block' && bgVideo.src){ bgVideo.muted=false; bgVideo.play
+<!-- 1. WELCOME YOU'RE INVITED - FIXED DI NA MASE-SEARCH NI GOOGLE -->
+<div id="welcome">
+<div style="font-size:60px;pointer-events:none">💌</div>
+<div style="font-family:'Great Vibes';font-size:48px;pointer-events:none">Welcome</div>
+<div style="font-size:21px;font-weight:800;pointer-events:none">YOU'RE INVITED! 🎉</div>
+<div
