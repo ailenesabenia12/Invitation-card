@@ -3,146 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitation Kristine</title>
+<title>Invitation Ailene</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:white;font-family:Arial;overflow-y:auto;min-height:100vh}
-.envelope{position:fixed;inset:0;background:#ff8fab;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;width:100vw;height:100vh;touch-action:manipulation}
-.envelope h2{color:white;margin:12px;font-size:26px}
-.envelope p{color:white;opacity:0.9}
-.wrap{width:100%;max-width:400px;margin:0 auto;padding:15px;text-align:center;padding-bottom:60px}
-.card{width:100%;height:460px;background:white;border:2px solid #ffd1e0;border-radius:25px;position:relative;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.12);margin-top:10px}
-#media{position:absolute;inset:0;z-index:1}
+html,body{width:100%;overflow-x:hidden;overflow-y:auto;background:white;font-family:Arial}
+.envelope{position:fixed;inset:0;background:#ff8fab;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;width:100vw;height:100vh;cursor:pointer}
+.envelope.hide{display:none!important}
+.wrap{width:100%;max-width:400px;margin:0 auto;padding:20px 15px 60px;text-align:center}
+.top-title h1{font-family:cursive;font-size:32px;color:#ff2e7a;line-height:1.1}
+.card{width:100%;height:460px;background:white;border:2px solid #ffd1e0;border-radius:25px;position:relative;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.12);margin:12px 0}
+#media{position:absolute;inset:0;z-index:1;background:white}
 #media img,#media video{width:100%;height:100%;object-fit:cover}
-.dragText{position:absolute;left:30px;top:180px;z-index:10;font-family:cursive;font-size:30px;color:#ff2e7a;cursor:grab;padding:8px 14px;background:rgba(255,255,255,0.85);border-radius:12px;border:2px dashed #ff8fab;min-width:140px;touch-action:none}
-.dragText.locked{border:2px solid transparent;background:rgba(255,255,255,0.5);cursor:text}
-.outside{margin:20px 0 10px 0}
-.outside h1{font-family:cursive;font-size:34px;color:#ff2e7a}
-.controls{background:#fff0f5;border-radius:20px;padding:14px;margin-top:15px}
+.dragText{position:absolute;left:30px;top:170px;z-index:10;font-family:cursive;font-size:30px;color:#ff2e7a;padding:10px 16px;background:rgba(255,255,255,0.85);border-radius:12px;border:2px dashed #ff8fab;min-width:150px;touch-action:none}
+.dragText.locked{border:1px solid transparent}
+.outside h2{font-family:cursive;font-size:30px;color:#ff2e7a;margin:10px 0}
+.controls{background:#fff0f5;border-radius:20px;padding:15px;margin-top:15px}
 button{background:#ff2e7a;color:white;border:none;padding:12px;border-radius:20px;margin:6px;width:92%;font-size:14px;font-weight:bold}
 button.small{width:auto;padding:8px 12px;font-size:12px;background:#333;margin:3px}
-input{width:92%;margin:8px 0;font-size:12px}
+input{width:92%;margin:8px 0}
 .link{width:92%;padding:9px;border:1px solid #ddd;border-radius:8px;font-size:11px;background:white}
 .balloon{position:fixed;font-size:24px;bottom:-50px;animation:fly 7s infinite linear;pointer-events:none}
 @keyframes fly{0%{transform:translateY(0)}100%{transform:translateY(-130vh)}}
+.hidden{display:none!important}
 </style>
 </head>
 <body>
 
 <div class="balloon" style="left:10%">🎈</div>
-<div class="balloon" style="left:40%;animation-delay:1s">🎉</div>
-<div class="balloon" style="left:75%;animation-delay:0.5s">🎊</div>
+<div class="balloon" style="left:50%;animation-delay:1s">🎉</div>
+<div class="balloon" style="left:85%;animation-delay:0.5s">🎊</div>
 
-<!-- SOBRE SA LABAS - AYOS NA TAP! -->
 <div class="envelope" id="env">
-<div style="font-size:90px">💌</div>
-<h2>You are Invited!</h2>
-<p>Tap to Open</p>
+<div style="font-size:80px">💌</div>
+<h2 style="color:white">You are Invited!</h2>
+<p style="color:white">Tap to Open</p>
 </div>
 
 <div class="wrap">
+<div class="top-title">
+<h1>Birthday Party<br>Ailene<br><span style="font-size:20px">June12 - Circle Quezon City</span></h1>
+</div>
+
 <div class="card" id="card">
 <div id="media"></div>
 <div id="hiText" class="dragText" contenteditable="true">Hi Kristine</div>
 </div>
 
 <div class="outside">
-<h1>You are invited</h1>
-<p>💖 I-drag & Edit si Hi Kristine sa puti 💖</p>
+<h2>You are invited</h2>
+<p id="guestHint">💖</p>
 </div>
 
-<div class="controls">
+<!-- ADMIN ONLY CONTROLS - HINDI MAKIKITA NI KRISTINE -->
+<div class="controls" id="adminPanel">
+<p style="font-size:12px;color:#ff2e7a;font-weight:bold">ADMIN KA - ITO LANG MAKAKITA NG UPLOAD</p>
 <button class="small" onclick="editText()">✏️ EDIT</button>
 <button class="small" onclick="saveAll()">💾 SAVE</button>
 <button class="small" onclick="unlockDrag()">🔓 DRAG</button>
 <hr style="margin:10px 0">
 <input type="file" id="picFile" accept="image/*,video/mp4">
-<button onclick="uploadPic()">⬇️ UPLOAD PHOTO / VIDEO MP4 (kahit mataas)</button>
+<button onclick="uploadPic()">⬇️ UPLOAD PHOTO / VIDEO MP4</button>
 <input type="file" id="musicFile" accept="audio/*,video/mp4">
-<button onclick="uploadMusic()">⬇️ UPLOAD SOUND MP4 / MP3 (kahit mataas)</button>
+<button onclick="uploadMusic()">⬇️ UPLOAD SOUND MP4 / MP3</button>
 <button onclick="playMusic()">▶️ PLAY SOUND</button>
 <hr style="margin:10px 0">
 <input id="linkBox" class="link" readonly>
-<button onclick="copyLink()">📋 COPY LINK</button>
+<button onclick="copyGuestLink()">📋 COPY LINK FOR KRISTINE (GUEST LANG)</button>
+<button onclick="copyAdminLink()" style="background:#555">🔗 COPY ADMIN LINK (sayo lang)</button>
 <button onclick="clearAll()" style="background:#888">🗑️ CLEAR BACK TO PUTI</button>
+</div>
+
+<div id="guestPanel" class="hidden">
+<p style="font-size:13px;color:#666">Pwede mo i-edit name mo at i-drag 💖</p>
 </div>
 </div>
 
 <audio id="myAudio" loop></audio>
 
 <script>
+const params=new URLSearchParams(location.search);
+const isGuest=params.has('guest');
+const isAdmin=!isGuest;
+
 const env=document.getElementById('env');
 const hiText=document.getElementById('hiText');
 const media=document.getElementById('media');
 const audio=document.getElementById('myAudio');
-document.getElementById('linkBox').value=location.href;
+const adminPanel=document.getElementById('adminPanel');
+const guestPanel=document.getElementById('guestPanel');
+const guestHint=document.getElementById('guestHint');
 
-// FIX TAP TO OPEN - GUMAGANA NA SA PHONE!
-function openEnv(){ env.style.display='none'; if(audio.src) audio.play().catch(()=>{}); }
+if(isGuest){
+ adminPanel.classList.add('hidden');
+ guestPanel.classList.remove('hidden');
+ guestHint.innerText='💖 See you! 💖';
+} else {
+ guestHint.innerText='💖 I-drag & Edit si Hi Kristine 💖';
+}
+
+function openEnv(){ env.classList.add('hide'); if(audio.src) audio.play().catch(()=>{}); }
 env.addEventListener('click', openEnv);
-env.addEventListener('touchend', function(e){ e.preventDefault(); openEnv(); });
+env.addEventListener('touchend', e=>{e.preventDefault(); openEnv();});
 
 let isDragging=false, startX, startY, initX, initY, locked=false;
 function startDrag(e){
-if(locked) return;
-isDragging=true;
-let p=e.touches?e.touches[0]:e;
-startX=p.clientX; startY=p.clientY;
-initX=hiText.offsetLeft; initY=hiText.offsetTop;
+ if(locked && isAdmin) return;
+ if(isGuest) locked=false;
+ isDragging=true;
+ let p=e.touches?e.touches[0]:e;
+ startX=p.clientX; startY=p.clientY;
+ initX=hiText.offsetLeft; initY=hiText.offsetTop;
 }
 hiText.addEventListener('mousedown', startDrag);
 hiText.addEventListener('touchstart', startDrag, {passive:false});
-window.addEventListener('mousemove', function(e){
-if(!isDragging||locked) return;
-let p=e;
-hiText.style.left=(initX + p.clientX - startX)+'px';
-hiText.style.top=(initY + p.clientY - startY)+'px';
+window.addEventListener('mousemove', e=>{
+ if(!isDragging) return;
+ if(locked && isAdmin) return;
+ hiText.style.left=(initX + e.clientX - startX)+'px';
+ hiText.style.top=(initY + e.clientY - startY)+'px';
 });
-window.addEventListener('touchmove', function(e){
-if(!isDragging||locked) return;
-e.preventDefault();
-let p=e.touches[0];
-hiText.style.left=(initX + p.clientX - startX)+'px';
-hiText.style.top=(initY + p.clientY - startY)+'px';
-}, {passive:false});
+window.addEventListener('touchmove', e=>{
+ if(!isDragging) return;
+ if(locked && isAdmin) return;
+ e.preventDefault();
+ let p=e.touches[0];
+ hiText.style.left=(initX + p.clientX - startX)+'px';
+ hiText.style.top=(initY + p.clientY - startY)+'px';
+},{passive:false});
 window.addEventListener('mouseup', ()=>isDragging=false);
 window.addEventListener('touchend', ()=>isDragging=false);
 
 function editText(){locked=false; hiText.classList.remove('locked'); hiText.focus();}
 function unlockDrag(){locked=false; hiText.classList.remove('locked');}
 function saveAll(){
-locked=true; hiText.classList.add('locked');
-localStorage.setItem('inv_text', hiText.innerText);
-localStorage.setItem('inv_x', hiText.style.left);
-localStorage.setItem('inv_y', hiText.style.top);
-localStorage.setItem('inv_locked','1');
-alert('Na-save na! Hindi na ma-drag pero pwede pa ma-edit. Hindi mawawala!');
+ locked=true; hiText.classList.add('locked');
+ localStorage.setItem('inv_text', hiText.innerText);
+ localStorage.setItem('inv_x', hiText.style.left);
+ localStorage.setItem('inv_y', hiText.style.top);
+ localStorage.setItem('inv_locked','1');
+ alert('Na-save!');
 }
 function uploadPic(){
-let f=document.getElementById('picFile').files[0];
-if(!f) return alert('Pili ka muna!');
-let url=URL.createObjectURL(f);
-media.innerHTML=f.type.startsWith('video')?`<video src="${url}" autoplay loop muted playsinline></video>`:`<img src="${url}">`;
-try{let r=new FileReader(); r.onload=e=>{localStorage.setItem('inv_bg',e.target.result); localStorage.setItem('inv_bg_type',f.type.startsWith('video')?'video':'image')}; r.readAsDataURL(f);}catch{}
+ let f=document.getElementById('picFile').files[0];
+ if(!f) return alert('Pili ka muna!');
+ let url=URL.createObjectURL(f);
+ media.innerHTML=f.type.startsWith('video')?`<video src="${url}" autoplay loop muted playsinline></video>`:`<img src="${url}">`;
+ try{let r=new FileReader(); r.onload=e=>{localStorage.setItem('inv_bg',e.target.result); localStorage.setItem('inv_bg_type',f.type.startsWith('video')?'video':'image')}; r.readAsDataURL(f);}catch{}
 }
 function uploadMusic(){
-let f=document.getElementById('musicFile').files[0];
-if(!f) return alert('Pili ka muna sound!');
-let url=URL.createObjectURL(f);
-audio.src=url; audio.play().catch(()=>{});
-try{let r=new FileReader(); r.onload=e=>{localStorage.setItem('inv_music',e.target.result)}; r.readAsDataURL(f);}catch{}
+ let f=document.getElementById('musicFile').files[0];
+ if(!f) return alert('Pili ka muna sound!');
+ let url=URL.createObjectURL(f);
+ audio.src=url; audio.play().catch(()=>{});
+ try{let r=new FileReader(); r.onload=e=>{localStorage.setItem('inv_music',e.target.result)}; r.readAsDataURL(f);}catch{}
 }
-function playMusic(){if(!audio.src) return alert('Upload ka muna sound!'); audio.play();}
-function copyLink(){navigator.clipboard.writeText(document.getElementById('linkBox').value).then(()=>alert('Na-copy na link!'))}
+function playMusic(){if(!audio.src) return alert('Upload ka muna!'); audio.play();}
+function copyGuestLink(){
+ let base=location.origin+location.pathname;
+ let guestLink=base+'?guest=1';
+ navigator.clipboard.writeText(guestLink).then(()=>alert('Na-copy na GUEST LINK! Ito send mo kay Kristine — card lang makikita nya, walang upload!'));
+ document.getElementById('linkBox').value=guestLink;
+}
+function copyAdminLink(){
+ let base=location.origin+location.pathname;
+ let adminLink=base+'?admin=1';
+ navigator.clipboard.writeText(adminLink).then(()=>alert('Admin link na-copy — sayo lang to!'));
+ document.getElementById('linkBox').value=adminLink;
+}
 function clearAll(){if(confirm('Back to puti?')){localStorage.clear(); location.reload();}}
 
+// LOAD SAVED
 let t=localStorage.getItem('inv_text'); if(t) hiText.innerText=t;
 let x=localStorage.getItem('inv_x'); if(x) hiText.style.left=x;
 let y=localStorage.getItem('inv_y'); if(y) hiText.style.top=y;
-if(localStorage.getItem('inv_locked')){locked=true; hiText.classList.add('locked');}
+if(localStorage.getItem('inv_locked') && isAdmin){locked=true; hiText.classList.add('locked');}
 let bg=localStorage.getItem('inv_bg'); let bt=localStorage.getItem('inv_bg_type');
 if(bg){ media.innerHTML=bt==='video'?`<video src="${bg}" autoplay loop muted playsinline></video>`:`<img src="${bg}">`; }
 let ms=localStorage.getItem('inv_music'); if(ms) audio.src=ms;
+document.getElementById('linkBox').value=location.origin+location.pathname+'?guest=1';
 </script>
 </body>
 </html>
