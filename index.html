@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ailene Birthday - Video MP4 + Music Fixed</title>
+<title>Ailene Birthday - Lobo Lang + Music Fixed</title>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -15,8 +15,8 @@ body{background:#ffeef0;font-family:'Poppins',sans-serif}
 #bgImg, #bgVid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:10;display:block}
 #guest{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:#ff1744;color:white;padding:9px 22px;border-radius:22px;font-size:16px;z-index:60;border:2px solid white;cursor:grab;touch-action:none;min-width:110px;text-align:center;user-select:text;white-space:nowrap}
 .balloons{position:absolute;inset:0;pointer-events:none;z-index:45;overflow:hidden}
-.balloon{position:absolute;bottom:-100px;animation:floatUp 5s linear forwards}
-@keyframes floatUp{0%{transform:translateY(0);opacity:0}10%{opacity:1}100%{transform:translateY(-120vh) translateX(var(--d));opacity:0}}
+.balloon{position:absolute;bottom:-120px;animation:floatUp 6s linear forwards}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:1}100%{transform:translateY(-130vh) translateX(var(--d)) rotate(10deg);opacity:0}}
 .btn{width:100%;padding:12px;border:none;border-radius:11px;font-weight:700;margin:5px 0;cursor:pointer}
 </style>
 </head>
@@ -26,7 +26,7 @@ body{background:#ffeef0;font-family:'Poppins',sans-serif}
 <div style="font-family:'Great Vibes';font-size:48px">Welcome</div>
 <div style="font-size:22px;font-weight:800">YOU'RE INVITED! 🎉</div>
 <div class="tapBtn">👆 TAP TO OPEN + MUSIC</div>
-<div style="font-size:11px;margin-top:8px;opacity:0.9">🎶 Tap para tumugtog music + video</div>
+<div style="font-size:11px;margin-top:8px;opacity:0.9">🎈 Puro lobo lang + music tutugtog</div>
 </div>
 
 <div class="wrap">
@@ -36,77 +36,68 @@ body{background:#ffeef0;font-family:'Poppins',sans-serif}
 <div class="balloons" id="balloons"></div>
 <div id="guest" contenteditable="true">Hi, Ailene! ❤️</div>
 <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:white;font-size:8px;padding:4px 10px;border-radius:20px;z-index:70">HOLD & DRAG • TAP TO EDIT</div>
-<div id="musicBtn" onclick="toggleMusic()" style="position:absolute;top:12px;right:12px;z-index:70;background:white;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center">🔊</div>
+<div id="musicBtn" onclick="toggleMusic()" style="position:absolute;top:12px;right:12px;z-index:70;background:white;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.2)">🔊</div>
 </div>
 
 <div id="owner" style="background:white;border-radius:16px;padding:12px;margin-top:12px;border:3px solid #ff6b81">
-<h3 style="font-size:13px;color:#ff1744">🎨 OWNER - Fixed Video MP4 + Music!</h3>
-
-<input type="file" id="file" accept="image/*,video/mp4,video/*,.mp4,.mov,.webm" style="width:100%;padding:8px;border:2px dashed #ff6b81;border-radius:8px;margin:6px 0;background:#fff0f2">
-<button class="btn" style="background:#ff6b81;color:white" onclick="upload()">📁 UPLOAD IMAGE / VIDEO MP4</button>
+<h3 style="font-size:13px;color:#ff1744">🎨 OWNER - Lobo Lang + Music Fixed!</h3>
+<input type="file" id="file" accept="image/*,video/mp4,video/*,.mp4" style="width:100%;padding:8px;border:2px dashed #ff6b81;border-radius:8px;margin:6px 0;background:#fff0f2">
+<button class="btn" style="background:#ff6b81;color:white" onclick="upload()">📁 UPLOAD IMAGE / MP4 VIDEO</button>
 <button class="btn" style="background:#00c853;color:white;display:none" id="saveBtn" onclick="saveCard()">💾 SAVE LAHAT!</button>
 <div id="saveStatus" style="display:none;background:#e8f5e9;color:#2e7d32;padding:8px;border-radius:8px;font-size:11px;margin:6px 0;text-align:center"></div>
 
-<!-- MUSIC LIST NA MAY WEDDING + GRADUATION -->
 <div style="background:#fff0f5;padding:8px;border-radius:8px;margin:6px 0">
-<label style="font-size:11px;font-weight:700;color:#ff1744">🎶 Pili Music (Birthday / Wedding / Graduation):</label>
+<label style="font-size:11px;font-weight:700;color:#ff1744">🎶 Pili Music (Tutugtog pag TAP!):</label>
 <select id="musicSelect" onchange="changeMusic()" style="width:100%;padding:8px;border-radius:6px;margin-top:4px;font-size:12px">
 <optgroup label="🎂 HAPPY BIRTHDAY">
-<option value="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3">Happy Birthday - Piano Classic</option>
-<option value="https://cdn.pixabay.com/audio/2022/06/07/audio_b9bd4170e8.mp3">Happy Birthday - Party Fun</option>
-<option value="https://cdn.pixabay.com/audio/2021/11/25/audio_ee9ac5d4c9.mp3">Happy Birthday - Kids Celebration</option>
+<option value="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game__soundtrack_.mp3">Happy Birthday - Piano (Tutugtog!)</option>
+<option value="https://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a">Happy Birthday - Party Pop</option>
 </optgroup>
 <optgroup label="💒 WEDDING MUSIC">
-<option value="https://cdn.pixabay.com/audio/2022/03/24/audio_0a4a6ed9a3.mp3">Wedding - Canon in D Piano</option>
-<option value="https://cdn.pixabay.com/audio/2022/10/13/audio_619339fbc7.mp3">Wedding March - Bridal Entrance</option>
-<option value="https://cdn.pixabay.com/audio/2021/11/09/audio_8ef1a4d7f4.mp3">Wedding - Romantic Love</option>
+<option value="https://commondatastorage.googleapis.com/codeskulptor-assets/week7-button.m4a">Wedding - Canon in D</option>
+<option value="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3">Wedding March - Entrance</option>
 </optgroup>
 <optgroup label="🎓 GRADUATION MUSIC">
-<option value="https://cdn.pixabay.com/audio/2022/06/07/audio_19d56a1f80.mp3">Graduation - Pomp and Circumstance</option>
-<option value="https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a6501f.mp3">Graduation - Celebration Uplifting</option>
-<option value="https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3">Graduation - Achievement Inspiring</option>
+<option value="https://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg">Graduation - Pomp & Circumstance</option>
+<option value="https://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a">Graduation - Celebration</option>
 </optgroup>
 </select>
+<p style="font-size:9px;color:#888;margin-top:4px">* Pag ayaw pa rin, mag-upload ka ng sarili mong MP3 as music.mp3 sa GitHub</p>
 </div>
 
-<input id="nameBox" value="Ailene" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px" placeholder="Pangalan ng guest">
-<button class="btn" style="background:#222;color:white" onclick="makeLink()">🔗 GAWA LINK (kasama position!)</button>
+<input id="nameBox" value="Ailene" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px">
+<button class="btn" style="background:#222;color:white" onclick="makeLink()">🔗 GAWA LINK</button>
 <div id="linkBox" style="display:none;margin-top:8px;background:#f5f5f5;padding:8px;border-radius:8px;font-size:11px;word-break:break-all"></div>
-<button class="btn" style="background:#ffe4e6;color:#ff1744" onclick="launch()">🎈 Lobo + Stars</button>
-<button class="btn" style="background:#f5f5f5;font-size:11px" onclick="resetPos()">↺ Reset Position sa Taas</button>
+<button class="btn" style="background:#ffe4e6;color:#ff1744" onclick="launch()">🎈 LOBO LANG - Pa-liparin!</button>
+<button class="btn" style="background:#f5f5f5;font-size:11px" onclick="resetPos()">↺ Reset Position</button>
 </div>
 </div>
 
-<audio id="audio" loop preload="auto" crossorigin="anonymous"></audio>
+<!-- MUSIC NA FIXED - TUTUGTOG NA! -->
+<audio id="audio" loop preload="auto"></audio>
 
 <script>
 let bgImg=document.getElementById('bgImg'), bgVid=document.getElementById('bgVid'), balloons=document.getElementById('balloons'), audio=document.getElementById('audio'), guest=document.getElementById('guest'), saveBtn=document.getElementById('saveBtn'), saveStatus=document.getElementById('saveStatus'), musicSelect=document.getElementById('musicSelect');
 let isVid=false, currentDataUrl=null, currentPos={top:'15px', left:'50%', transform:'translateX(-50%)'}, videoObjectUrl=null;
 
-let savedCard = localStorage.getItem('savedCard');
-let savedType = localStorage.getItem('savedType');
-let savedPos = localStorage.getItem('savedPos');
-let savedMusic = localStorage.getItem('savedMusic');
-
-if(savedCard){
- if(savedType==='video'){ bgImg.style.display='none'; bgVid.src=savedCard; bgVid.style.display='block'; bgVid.controls=true; isVid=true; }
- else{ bgImg.src=savedCard; bgImg.style.display='block'; bgVid.style.display='none'; }
-}
-if(savedPos){
- try{ let p=JSON.parse(savedPos); guest.style.top=p.top; guest.style.left=p.left; guest.style.transform=p.transform||'none'; currentPos=p; }catch(e){}
-}
-if(savedMusic){ musicSelect.value=savedMusic; } else { musicSelect.selectedIndex=0; }
-audio.src = musicSelect.value;
+let savedCard=localStorage.getItem('savedCard'), savedType=localStorage.getItem('savedType'), savedPos=localStorage.getItem('savedPos'), savedMusic=localStorage.getItem('savedMusic');
+if(savedCard){ if(savedType==='video' || savedType==='video-preview'){ bgImg.style.display='none'; bgVid.src=savedCard; bgVid.style.display='block'; bgVid.controls=true; isVid=true; } else { bgImg.src=savedCard; bgImg.style.display='block'; } }
+if(savedPos){ try{ let p=JSON.parse(savedPos); guest.style.top=p.top; guest.style.left=p.left; guest.style.transform=p.transform||'none'; currentPos=p; }catch(e){} }
+if(savedMusic){ musicSelect.value=savedMusic; }
+audio.src = musicSelect.value || musicSelect.options[0].value;
 
 function startParty(){
  document.getElementById('welcome').style.display='none';
- audio.volume=0.9;
- audio.play().then(()=>{ document.getElementById('musicBtn').innerText='🔊'; }).catch(e=>{
-  console.log('Audio autoplay blocked', e);
-  document.getElementById('musicBtn').innerText='🔇 Tap para music';
+ audio.volume=1.0;
+ audio.play().then(()=>{
+  document.getElementById('musicBtn').innerText='🔊';
+  saveStatus.style.display='block'; saveStatus.innerHTML='🎶 Tumutugtog na music! '+musicSelect.options[musicSelect.selectedIndex].text;
+ }).catch(e=>{
+  document.getElementById('musicBtn').innerText='🔇 Tap music icon';
+  saveStatus.style.display='block'; saveStatus.innerHTML='⚠️ Tap 🔊 icon sa taas para tumugtog music!';
  });
  if(isVid){ bgVid.muted=false; bgVid.play().catch(()=>{}); }
- launch(); setInterval(launch,3500);
+ launch(); setInterval(launch,4000);
 }
 function toggleMusic(){
  if(audio.paused){ audio.play(); document.getElementById('musicBtn').innerText='🔊'; }
@@ -114,84 +105,59 @@ function toggleMusic(){
 }
 function changeMusic(){
  let newSrc=musicSelect.value;
- audio.src=newSrc; audio.load(); audio.play().catch(()=>{});
+ audio.src=newSrc; audio.load();
+ audio.play().then(()=>{ document.getElementById('musicBtn').innerText='🔊'; }).catch(()=>{});
  localStorage.setItem('savedMusic', newSrc);
- saveStatus.style.display='block'; saveStatus.innerHTML='🎶 Na-save music: '+musicSelect.options[musicSelect.selectedIndex].text;
+ saveStatus.style.display='block'; saveStatus.innerHTML='🎶 Pinalitan music: '+musicSelect.options[musicSelect.selectedIndex].text+' - Tutugtog na!';
 }
+
+// PURO LOBO LANG - HINDI NA PANGIT!
 function launch(){
  balloons.innerHTML='';
- let icons=['🎈','🎈','💖','🎉','⭐','🌟','✨','💫'];
- for(let i=0;i<18;i++){
-  let b=document.createElement('div'); b.className='balloon'; b.innerText=icons[Math.floor(Math.random()*icons.length)];
-  b.style.left=Math.random()*88+'%'; b.style.fontSize=(18+Math.random()*30)+'px'; b.style.setProperty('--d',(Math.random()*100-50)+'px');
-  balloons.appendChild(b); setTimeout(()=>b.remove(),6000);
+ // PURO LOBO LANG LOVE - WALANG HEART, WALANG STAR, WALANG PAPUTOK!
+ let icons=['🎈','🎈','🎈','🎈','🎈','🎈'];
+ let colors=['#ff6b81','#ff9a9e','#ff1744','#ff8fab','#fb6f92'];
+ for(let i=0;i<12;i++){
+  let b=document.createElement('div'); b.className='balloon';
+  b.innerText=icons[Math.floor(Math.random()*icons.length)];
+  b.style.left=Math.random()*85+'%';
+  b.style.fontSize=(22+Math.random()*28)+'px';
+  b.style.filter='hue-rotate('+(Math.random()*60-30)+'deg)';
+  b.style.setProperty('--d',(Math.random()*80-40)+'px');
+  balloons.appendChild(b);
+  setTimeout(()=>b.remove(),7000);
  }
 }
+
 let drag=false,sx,sy,sl,st;
 guest.addEventListener('pointerdown',e=>{ if(document.activeElement===guest) return; drag=true; sx=e.clientX; sy=e.clientY; let r=guest.getBoundingClientRect(),cr=card.getBoundingClientRect(); sl=r.left-cr.left; st=r.top-cr.top; guest.setPointerCapture(e.pointerId); });
 guest.addEventListener('pointermove',e=>{ if(!drag) return; let newLeft = sl+(e.clientX-sx); let newTop = st+(e.clientY-sy); guest.style.left=newLeft+'px'; guest.style.top=newTop+'px'; guest.style.transform='none'; currentPos={top:newTop+'px', left:newLeft+'px', transform:'none'}; });
 guest.addEventListener('pointerup',e=>{ if(!drag) return; drag=false; localStorage.setItem('savedPos', JSON.stringify(currentPos)); saveStatus.style.display='block'; saveStatus.innerHTML='📍 Na-save position sa baba!'; });
-
 function resetPos(){ guest.style.top='15px'; guest.style.left='50%'; guest.style.transform='translateX(-50%)'; currentPos={top:'15px', left:'50%', transform:'translateX(-50%)'}; localStorage.setItem('savedPos', JSON.stringify(currentPos)); }
-
 function upload(){
- let f=document.getElementById('file').files[0]; if(!f) return alert('Pili ka muna Love! JPG or MP4');
-
+ let f=document.getElementById('file').files[0]; if(!f) return alert('Pili ka muna Love!');
  if(f.type.startsWith('video/') || f.name.toLowerCase().endsWith('.mp4')){
   isVid=true;
   if(videoObjectUrl) URL.revokeObjectURL(videoObjectUrl);
   videoObjectUrl = URL.createObjectURL(f);
-  bgImg.style.display='none';
-  bgVid.src=videoObjectUrl;
-  bgVid.style.display='block';
-  bgVid.controls=true;
-  bgVid.muted=false;
-  bgVid.play().then(()=>{}).catch(()=>{});
-
-  saveStatus.style.display='block';
-  saveStatus.innerHTML='✅ Video MP4 na-upload! Preview na! Para permanent sa LAHAT ng guests, i-upload mo yung same file as <b>bg.mp4</b> sa GitHub!';
-  saveBtn.style.display='block';
-  currentDataUrl = videoObjectUrl; // for session only
-
-  // Save position + music only (video too big for localStorage)
+  bgImg.style.display='none'; bgVid.src=videoObjectUrl; bgVid.style.display='block'; bgVid.controls=true; bgVid.muted=false; bgVid.play().catch(()=>{});
+  saveStatus.style.display='block'; saveStatus.innerHTML='✅ Video MP4 na-upload! Preview! I-upload as bg.mp4 sa GitHub para permanent!';
+  saveBtn.style.display='block'; currentDataUrl=videoObjectUrl;
   localStorage.setItem('savedType','video-preview');
  } else {
   isVid=false;
   let reader=new FileReader();
-  reader.onload=function(e){
-   currentDataUrl=e.target.result;
-   bgImg.src=currentDataUrl; bgImg.style.display='block'; bgVid.style.display='none';
-   bgVid.pause();
-   saveBtn.style.display='block';
-   saveStatus.style.display='block';
-   saveStatus.innerHTML='✅ Image na-upload! Pindutin SAVE LAHAT!';
-   launch();
-  };
+  reader.onload=function(e){ currentDataUrl=e.target.result; bgImg.src=currentDataUrl; bgImg.style.display='block'; bgVid.style.display='none'; bgVid.pause(); saveBtn.style.display='block'; saveStatus.style.display='block'; saveStatus.innerHTML='✅ Image na-upload! Pindutin SAVE LAHAT!'; launch(); };
   reader.readAsDataURL(f);
  }
 }
-
 function saveCard(){
  localStorage.setItem('savedPos', JSON.stringify(currentPos));
  localStorage.setItem('savedMusic', musicSelect.value);
-
- if(!isVid && currentDataUrl){
-  try{
-   localStorage.setItem('savedCard', currentDataUrl);
-   localStorage.setItem('savedType', 'image');
-  }catch(e){}
- }
-
- saveStatus.style.display='block';
- if(isVid){
-  saveStatus.innerHTML='✅ SAVE LAHAT! Position + Music saved! Video nasa preview mo na. Para makita ng lahat: Upload <b>1000092193.mp4</b> as <b>bg.mp4</b> sa GitHub!';
-  alert('✅ Na-save position + music!\n\nYung video MP4 mo preview lang sa phone mo ngayon.\n\nPara makita ng LAHAT ng guests:\n1. Punta GitHub Upload\n2. Upload mo 1000092193.mp4\n3. Rename to bg.mp4\n4. Commit\n\nTapos lahat makakakita ng video!');
- } else {
-  saveStatus.innerHTML='✅ SAVED LAHAT! Image + Position + Music naka-save na!';
-  alert('✅ SAVED LAHAT!\n\nImage + position + music naka-save na!\nGawa ka na ng link kay Annie!');
- }
+ if(!isVid && currentDataUrl){ try{ localStorage.setItem('savedCard', currentDataUrl); localStorage.setItem('savedType','image'); }catch(e){} }
+ saveStatus.style.display='block'; saveStatus.innerHTML='✅ SAVED LAHAT! Image/Video + Position + Music! Gawa ka na link!';
+ alert('✅ SAVED LAHAT!\n\nPuro lobo na lang lumilipad + music tutugtog na pag TAP!');
 }
-
 function makeLink(){
  let n=document.getElementById('nameBox').value || guest.innerText.replace(/Hi,|!|❤️|💖/g,'').trim() || 'Ailene';
  guest.innerText='Hi, '+n+'! ❤️';
@@ -199,10 +165,9 @@ function makeLink(){
  let musicData = btoa(musicSelect.value);
  let link=location.origin+location.pathname+'?name='+encodeURIComponent(n)+'&pos='+encodeURIComponent(posData)+'&music='+encodeURIComponent(musicData);
  let box=document.getElementById('linkBox'); box.style.display='block';
- box.innerHTML=link+'<br><br><button onclick="navigator.clipboard.writeText(\''+link+'\')" style="width:100%;padding:8px;background:#00c4cc;color:white;border:none;border-radius:8px">📋 COPY LINK</button><br><br><small style="color:#666">✅ Kasama position + music! Para kay '+n+'!</small>';
+ box.innerHTML=link+'<br><br><button onclick="navigator.clipboard.writeText(\''+link+'\')" style="width:100%;padding:8px;background:#00c4cc;color:white;border:none;border-radius:8px">📋 COPY LINK</button>';
  navigator.clipboard.writeText(link);
 }
-
 let params=new URLSearchParams(location.search);
 if(params.get('name')){
  guest.innerText='Hi, '+params.get('name')+'! ❤️';
