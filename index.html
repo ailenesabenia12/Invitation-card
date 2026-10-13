@@ -3,35 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitation Ailene</title>
+<title>Birthday Ailene</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;overflow-x:hidden;overflow-y:auto;background:white;font-family:Arial}
-.envelope{position:fixed;inset:0;background:#ff8fab;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;width:100vw;height:100vh;cursor:pointer}
+body{background:white;font-family:Arial;overflow-y:auto}
+.envelope{position:fixed;inset:0;background:#ff8fab;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;cursor:pointer}
 .envelope.hide{display:none!important}
 .wrap{width:100%;max-width:400px;margin:0 auto;padding:20px 15px 60px;text-align:center}
 .top-title h1{font-family:cursive;font-size:32px;color:#ff2e7a;line-height:1.1}
-.card{width:100%;height:460px;background:white;border:2px solid #ffd1e0;border-radius:25px;position:relative;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.12);margin:12px 0}
+.card{width:100%;height:480px;background:white;border:2px solid #ffd1e0;border-radius:25px;position:relative;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.12);margin:12px 0;background:white}
 #media{position:absolute;inset:0;z-index:1;background:white}
 #media img,#media video{width:100%;height:100%;object-fit:cover}
-.dragText{position:absolute;left:30px;top:170px;z-index:10;font-family:cursive;font-size:30px;color:#ff2e7a;padding:10px 16px;background:rgba(255,255,255,0.85);border-radius:12px;border:2px dashed #ff8fab;min-width:150px;touch-action:none}
-.dragText.locked{border:1px solid transparent}
+.dragText{position:absolute;left:30px;top:200px;z-index:10;font-family:cursive;font-size:30px;color:#ff2e7a;padding:10px 16px;background:rgba(255,255,255,0.9);border-radius:12px;min-width:150px}
+.guest.dragText{border:2px solid #ff8fab;cursor:text}
+.admin.dragText{border:2px dashed #ff8fab;cursor:grab;touch-action:none}
 .outside h2{font-family:cursive;font-size:30px;color:#ff2e7a;margin:10px 0}
 .controls{background:#fff0f5;border-radius:20px;padding:15px;margin-top:15px}
 button{background:#ff2e7a;color:white;border:none;padding:12px;border-radius:20px;margin:6px;width:92%;font-size:14px;font-weight:bold}
 button.small{width:auto;padding:8px 12px;font-size:12px;background:#333;margin:3px}
 input{width:92%;margin:8px 0}
 .link{width:92%;padding:9px;border:1px solid #ddd;border-radius:8px;font-size:11px;background:white}
-.balloon{position:fixed;font-size:24px;bottom:-50px;animation:fly 7s infinite linear;pointer-events:none}
-@keyframes fly{0%{transform:translateY(0)}100%{transform:translateY(-130vh)}}
 .hidden{display:none!important}
 </style>
 </head>
 <body>
-
-<div class="balloon" style="left:10%">🎈</div>
-<div class="balloon" style="left:50%;animation-delay:1s">🎉</div>
-<div class="balloon" style="left:85%;animation-delay:0.5s">🎊</div>
 
 <div class="envelope" id="env">
 <div style="font-size:80px">💌</div>
@@ -51,39 +46,45 @@ input{width:92%;margin:8px 0}
 
 <div class="outside">
 <h2>You are invited</h2>
-<p id="guestHint">💖</p>
+<p id="hint">💖</p>
 </div>
 
-<!-- ADMIN ONLY CONTROLS - HINDI MAKIKITA NI KRISTINE -->
 <div class="controls" id="adminPanel">
-<p style="font-size:12px;color:#ff2e7a;font-weight:bold">ADMIN KA - ITO LANG MAKAKITA NG UPLOAD</p>
-<button class="small" onclick="editText()">✏️ EDIT</button>
+<p style="font-size:11px;color:#ff2e7a;font-weight:bold">ADMIN - SAYO LANG TO MAKIKITA</p>
+<button class="small" onclick="editText()">✏️ EDIT NAME</button>
 <button class="small" onclick="saveAll()">💾 SAVE</button>
-<button class="small" onclick="unlockDrag()">🔓 DRAG</button>
+<button class="small" onclick="unlockDrag()">🔓 DRAG ON/OFF</button>
 <hr style="margin:10px 0">
 <input type="file" id="picFile" accept="image/*,video/mp4">
-<button onclick="uploadPic()">⬇️ UPLOAD PHOTO / VIDEO MP4</button>
+<button onclick="uploadPic()">⬇️ UPLOAD CAKE (preview lang - i-upload din sa GitHub as cake.mp4)</button>
 <input type="file" id="musicFile" accept="audio/*,video/mp4">
-<button onclick="uploadMusic()">⬇️ UPLOAD SOUND MP4 / MP3</button>
+<button onclick="uploadMusic()">⬇️ UPLOAD SOUND (preview lang - i-upload as music.mp3)</button>
 <button onclick="playMusic()">▶️ PLAY SOUND</button>
 <hr style="margin:10px 0">
+<input id="guestNameInput" style="padding:8px;border-radius:8px;border:1px solid #ddd" placeholder="Lagay name ni guest: ex. Hi Michene">
+<button onclick="generateGuestLink()">📋 GENERATE LINK KAY KRISTINE</button>
 <input id="linkBox" class="link" readonly>
-<button onclick="copyGuestLink()">📋 COPY LINK FOR KRISTINE (GUEST LANG)</button>
-<button onclick="copyAdminLink()" style="background:#555">🔗 COPY ADMIN LINK (sayo lang)</button>
+<button onclick="copyLink()">📋 COPY LINK</button>
 <button onclick="clearAll()" style="background:#888">🗑️ CLEAR BACK TO PUTI</button>
+<p style="font-size:9px;color:gray;margin-top:8px">IMPORTANT: Para makita ni Kristine yung cake at sound, dapat naka-upload yung cake.mp4 at music.mp3 sa GitHub mo!</p>
 </div>
 
 <div id="guestPanel" class="hidden">
-<p style="font-size:13px;color:#666">Pwede mo i-edit name mo at i-drag 💖</p>
+<p style="font-size:14px;color:#666">Hi! Pwede mo i-edit name mo dito 💖 Tap lang sa name</p>
+<button onclick="playMusic()" style="margin-top:10px">▶️ PLAY MUSIC</button>
 </div>
 </div>
 
 <audio id="myAudio" loop></audio>
 
 <script>
+// ===== CONFIG - PALITAN MO LANG FILE NAME DITO PAG NA-UPLOAD MO NA SA GITHUB =====
+const DEFAULT_BG = "./cake.mp4"; // pag wala ka pang upload, white lang. pag na-upload mo cake.mp4 sa GitHub, lalabas na sa guest!
+const DEFAULT_MUSIC = "./music.mp3";
+
 const params=new URLSearchParams(location.search);
 const isGuest=params.has('guest');
-const isAdmin=!isGuest;
+const guestNameParam=params.get('name');
 
 const env=document.getElementById('env');
 const hiText=document.getElementById('hiText');
@@ -91,24 +92,42 @@ const media=document.getElementById('media');
 const audio=document.getElementById('myAudio');
 const adminPanel=document.getElementById('adminPanel');
 const guestPanel=document.getElementById('guestPanel');
-const guestHint=document.getElementById('guestHint');
+const hint=document.getElementById('hint');
+const bodyClass=document.body;
 
 if(isGuest){
  adminPanel.classList.add('hidden');
  guestPanel.classList.remove('hidden');
- guestHint.innerText='💖 See you! 💖';
+ hint.innerText='💖 See you! 💖';
+ document.body.classList.add('guest');
+ document.body.classList.remove('admin');
+ // GUEST - HINDI MA-DRAG, EDIT LANG
+ hiText.contentEditable=true;
 } else {
- guestHint.innerText='💖 I-drag & Edit si Hi Kristine 💖';
+ document.body.classList.add('admin');
+ hint.innerText='💖 I-drag & Edit si Hi Kristine 💖';
 }
 
-function openEnv(){ env.classList.add('hide'); if(audio.src) audio.play().catch(()=>{}); }
+// NAME FROM LINK - HINDI NA BABALIK SA KRISTINE
+if(guestNameParam){
+ hiText.innerText=decodeURIComponent(guestNameParam);
+} else {
+ let savedText=localStorage.getItem('inv_text');
+ if(savedText &&!isGuest) hiText.innerText=savedText;
+}
+
+function openEnv(){
+ env.classList.add('hide');
+ if(audio.src) audio.play().catch(()=>{});
+}
 env.addEventListener('click', openEnv);
 env.addEventListener('touchend', e=>{e.preventDefault(); openEnv();});
 
+// DRAG - ADMIN LANG, GUEST HINDI NA LIKOT
 let isDragging=false, startX, startY, initX, initY, locked=false;
 function startDrag(e){
- if(locked && isAdmin) return;
- if(isGuest) locked=false;
+ if(isGuest) return; // GUEST BAWAL MAG DRAG
+ if(locked) return;
  isDragging=true;
  let p=e.touches?e.touches[0]:e;
  startX=p.clientX; startY=p.clientY;
@@ -117,14 +136,14 @@ function startDrag(e){
 hiText.addEventListener('mousedown', startDrag);
 hiText.addEventListener('touchstart', startDrag, {passive:false});
 window.addEventListener('mousemove', e=>{
- if(!isDragging) return;
- if(locked && isAdmin) return;
+ if(isGuest) return;
+ if(!isDragging||locked) return;
  hiText.style.left=(initX + e.clientX - startX)+'px';
  hiText.style.top=(initY + e.clientY - startY)+'px';
 });
 window.addEventListener('touchmove', e=>{
- if(!isDragging) return;
- if(locked && isAdmin) return;
+ if(isGuest) return;
+ if(!isDragging||locked) return;
  e.preventDefault();
  let p=e.touches[0];
  hiText.style.left=(initX + p.clientX - startX)+'px';
@@ -133,54 +152,64 @@ window.addEventListener('touchmove', e=>{
 window.addEventListener('mouseup', ()=>isDragging=false);
 window.addEventListener('touchend', ()=>isDragging=false);
 
-function editText(){locked=false; hiText.classList.remove('locked'); hiText.focus();}
-function unlockDrag(){locked=false; hiText.classList.remove('locked');}
+function editText(){locked=false; hiText.focus();}
+function unlockDrag(){locked=!locked; alert(locked?'Drag OFF':'Drag ON');}
 function saveAll(){
- locked=true; hiText.classList.add('locked');
+ locked=true;
  localStorage.setItem('inv_text', hiText.innerText);
  localStorage.setItem('inv_x', hiText.style.left);
  localStorage.setItem('inv_y', hiText.style.top);
- localStorage.setItem('inv_locked','1');
  alert('Na-save!');
 }
+
+// LOAD MEDIA - KAHIT GUEST MAKIKITA NA CAKE AT SOUND KASI GALING GITHUB
+function loadDefaultMedia(){
+ // Try load cake.mp4 if exists
+ fetch(DEFAULT_BG, {method:'HEAD'}).then(r=>{
+  if(r.ok){
+   media.innerHTML=`<video src="${DEFAULT_BG}" autoplay loop muted playsinline></video>`;
+  }
+ }).catch(()=>{});
+ fetch(DEFAULT_MUSIC, {method:'HEAD'}).then(r=>{
+  if(r.ok){ audio.src=DEFAULT_MUSIC; }
+ }).catch(()=>{});
+}
+loadDefaultMedia();
+
+// ADMIN PREVIEW UPLOAD (pero dapat i-upload pa rin sa GitHub)
 function uploadPic(){
  let f=document.getElementById('picFile').files[0];
- if(!f) return alert('Pili ka muna!');
+ if(!f) return alert('Pili ka!');
  let url=URL.createObjectURL(f);
  media.innerHTML=f.type.startsWith('video')?`<video src="${url}" autoplay loop muted playsinline></video>`:`<img src="${url}">`;
- try{let r=new FileReader(); r.onload=e=>{localStorage.setItem('inv_bg',e.target.result); localStorage.setItem('inv_bg_type',f.type.startsWith('video')?'video':'image')}; r.readAsDataURL(f);}catch{}
 }
 function uploadMusic(){
  let f=document.getElementById('musicFile').files[0];
- if(!f) return alert('Pili ka muna sound!');
+ if(!f) return alert('Pili ka!');
  let url=URL.createObjectURL(f);
  audio.src=url; audio.play().catch(()=>{});
- try{let r=new FileReader(); r.onload=e=>{localStorage.setItem('inv_music',e.target.result)}; r.readAsDataURL(f);}catch{}
 }
-function playMusic(){if(!audio.src) return alert('Upload ka muna!'); audio.play();}
-function copyGuestLink(){
- let base=location.origin+location.pathname;
- let guestLink=base+'?guest=1';
- navigator.clipboard.writeText(guestLink).then(()=>alert('Na-copy na GUEST LINK! Ito send mo kay Kristine — card lang makikita nya, walang upload!'));
- document.getElementById('linkBox').value=guestLink;
-}
-function copyAdminLink(){
- let base=location.origin+location.pathname;
- let adminLink=base+'?admin=1';
- navigator.clipboard.writeText(adminLink).then(()=>alert('Admin link na-copy — sayo lang to!'));
- document.getElementById('linkBox').value=adminLink;
-}
-function clearAll(){if(confirm('Back to puti?')){localStorage.clear(); location.reload();}}
+function playMusic(){if(!audio.src) return alert('Wala pang music! Upload ka muna ng music.mp3 sa GitHub'); audio.play();}
 
-// LOAD SAVED
-let t=localStorage.getItem('inv_text'); if(t) hiText.innerText=t;
-let x=localStorage.getItem('inv_x'); if(x) hiText.style.left=x;
-let y=localStorage.getItem('inv_y'); if(y) hiText.style.top=y;
-if(localStorage.getItem('inv_locked') && isAdmin){locked=true; hiText.classList.add('locked');}
-let bg=localStorage.getItem('inv_bg'); let bt=localStorage.getItem('inv_bg_type');
-if(bg){ media.innerHTML=bt==='video'?`<video src="${bg}" autoplay loop muted playsinline></video>`:`<img src="${bg}">`; }
-let ms=localStorage.getItem('inv_music'); if(ms) audio.src=ms;
-document.getElementById('linkBox').value=location.origin+location.pathname+'?guest=1';
+function generateGuestLink(){
+ let name=document.getElementById('guestNameInput').value || hiText.innerText;
+ let base=location.origin+location.pathname;
+ let link=base+`?guest=1&name=${encodeURIComponent(name)}`;
+ document.getElementById('linkBox').value=link;
+ alert('Guest link ready! '+name+' na ang name, hindi na babalik sa Kristine!');
+}
+function copyLink(){
+ let v=document.getElementById('linkBox').value;
+ if(!v) return alert('Generate ka muna ng link!');
+ navigator.clipboard.writeText(v).then(()=>alert('Na-copy! Send mo na kay Kristine - card + sound lang makikita nya, walang upload, edit lang pwede!'));
+}
+function clearAll(){if(confirm('Clear?')){localStorage.clear(); location.reload();}}
+
+// LOAD SAVED POSITION ADMIN ONLY
+if(!isGuest){
+ let x=localStorage.getItem('inv_x'); if(x) hiText.style.left=x;
+ let y=localStorage.getItem('inv_y'); if(y) hiText.style.top=y;
+}
 </script>
 </body>
 </html>
